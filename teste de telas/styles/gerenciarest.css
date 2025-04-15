@@ -1,4 +1,3 @@
-/* Estilos Gerais */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #74ebd5, #acb6e5);
@@ -17,7 +16,7 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     width: 450px;
     text-align: center;
-    position: relative; /* Necessário para o botão de voltar */
+    position: relative;
     transition: transform 0.3s ease;
 }
 
@@ -30,7 +29,6 @@ h2, h3 {
     margin-bottom: 20px;
 }
 
-/* Seção de Busca */
 .search-section {
     margin-bottom: 20px;
 }
@@ -66,7 +64,6 @@ h2, h3 {
     background: linear-gradient(135deg, #0056b3, #00408a);
 }
 
-/* Resultados da Busca */
 .results-section {
     margin-bottom: 20px;
 }
@@ -156,12 +153,12 @@ input:focus {
     margin-top: 20px;
     display: flex;
     gap: 10px;
-    justify-content: flex-start; /* Alinha os botões à esquerda */
+    justify-content: flex-start; 
 }
 
 .btn-save, .btn-cancel, .btn-back {
-    padding: 8px 12px; /* Botão menor */
-    font-size: 12px; /* Fonte menor */
+    padding: 8px 12px; 
+    font-size: 12px; 
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -184,9 +181,9 @@ input:focus {
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-size: 12px; /* Fonte reduzida */
-    padding: 8px 12px; /* Tamanho reduzido */
-    position: absolute; /* Posiciona no canto inferior direito */
+    font-size: 12px; 
+    padding: 8px 12px; 
+    position: absolute; 
     top: 30px;
     left: 40px;
     transition: background-color 0.3s ease;
@@ -205,5 +202,5 @@ input:focus {
 }
 
 .btn-back:active {
-    background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de clique */
+    background: linear-gradient(135deg, #494f54, #434a4f); 
 }
