@@ -1,0 +1,209 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #ffffff;
+    padding: 50px 40px 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    width: 450px;
+    text-align: center;
+    position: relative; /* Necessário para o botão de voltar */
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+h2, h3 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Seção de Busca */
+.search-section {
+    margin-bottom: 20px;
+}
+
+.search-section input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.search-section input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.search-section button {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-section button:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+}
+
+/* Resultados da Busca */
+.results-section {
+    margin-bottom: 20px;
+}
+
+.results {
+    list-style-type: none;
+    padding: 0;
+}
+
+.results li {
+    background: linear-gradient(135deg, #f4f4f9, #e8e8f3);
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.results li:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.actions button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-edit:hover {
+    background-color: #218838;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* Formulário */
+.form-section {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    color: #555555;
+    font-size: 14px;
+}
+
+input {
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+}
+
+.btn-save, .btn-cancel, .btn-back {
+    padding: 8px 12px; /* Botão menor */
+    font-size: 12px; /* Fonte menor */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+}
+
+.btn-cancel {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+    border: none;
+}
+
+.btn-back {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 12px; /* Fonte reduzida */
+    padding: 8px 12px; /* Tamanho reduzido */
+    position: absolute; /* Posiciona no canto inferior direito */
+    top: 30px;
+    left: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+}
+
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #5a6268, #494f54);
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #5a6268, #494f54);
+}
+
+.btn-back:active {
+    background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de clique */
+}

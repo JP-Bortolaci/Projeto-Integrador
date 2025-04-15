@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Itens</title>
+    <link rel="stylesheet" href="../styles/gerenciarest.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gerenciar Itens</h2>
+
+        <!-- Botão Voltar -->
+        <a href="../pages/dashboard.html" class="btn-back">Voltar </a>
+
+        <!-- Sistema de Busca -->
+        <div class="search-section">
+            <label for="search">Buscar Item:</label>
+            <input type="text" id="search" placeholder="Ex.: Parafuso M5">
+            <button>Buscar</button>
+        </div>
+
+        <!-- Resultados da Busca -->
+        <div class="results-section">
+            <h3>Resultados:</h3>
+            <ul class="results">
+                <li>
+                    <strong>Parafuso M5</strong> - Localização: C1P1A1
+                    <div class="actions">
+                        <button class="btn-edit">Editar</button>
+                        <button class="btn-delete">Excluir</button>
+                    </div>
+                </li>
+                <li>
+                    <strong>Arruela Plana</strong> - Localização: C2P3A2
+                    <div class="actions">
+                        <button class="btn-edit">Editar</button>
+                        <button class="btn-delete">Excluir</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Formulário para Adicionar/Editar Itens -->
+        <div class="form-section">
+            <h3>Adicionar/Editar Item</h3>
+            <form>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" placeholder="Ex.: Parafuso M5">
+
+                <label for="reference">Referência:</label>
+                <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345">
+
+                <label for="location">Localização:</label>
+                <input type="text" id="location" name="location" placeholder="Ex.: C1P1A1">
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-save">Salvar</button>
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
