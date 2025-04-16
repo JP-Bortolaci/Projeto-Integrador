@@ -22,15 +22,10 @@ main.container {
     
 }
 
-/* Definindo o tamanho das informações da esquerda */
-.content {
-    width: 50%;
-}
-
 /* Estilizando toda a caixa de formulário */
 form {
     background: #ffffff;
-    width: 40%;
+    width: 80%;
     height: 50%;
     border-radius: 16px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
@@ -91,10 +86,11 @@ button {
 button:hover {
     background: linear-gradient(135deg, #0056b3, #00408a);
     box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+    transform: scale(1.02);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
 }
 
 /* Estilizando a o "Usuário:" e "Senha:" */
@@ -127,3 +123,33 @@ input:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
+
+/* Definindo o tamanho das boas vindas */
+.content {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftContent {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.firstArticle {
+    height: 30%;
+    background-color: red;
+}
+
+.secondArticle {
+    height: 30%;
+    background-color: blue;
+}
+
+.thirdArticle {
+    height: 30%;
+    background-color: green;
+}
+
