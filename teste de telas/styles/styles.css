@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 /* Definindo cor de fundo e fonte da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -30,7 +34,7 @@ form {
     border-radius: 16px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     justify-content: center;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -43,7 +47,7 @@ form:hover {
 
 /* Estilizando o texto "Login" */
 h2.login {
-    font-size: 1.5em;
+    font-size: 3rem;
     grid-column: 4/5;
     grid-row: 2/3;
     color: #333333;
@@ -76,7 +80,7 @@ button {
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -98,7 +102,7 @@ label {
     grid-row: 1/2;
     grid-column: 1/2;
     color: #555555;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 500;
     text-align: left;
 }
@@ -113,7 +117,7 @@ input {
     padding: 2%;
     border: 1px solid #cccccc;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 1.4rem;
     transition: all 0.3s ease;
     background: #f8f9fa;
 }
@@ -124,32 +128,63 @@ input:focus {
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
-/* Definindo o tamanho das boas vindas */
+/* Definindo o tamanho dos conteúdos */
 .content {
     width: 50%;
     height: 100%;
+}
+
+.rightContent {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .leftContent {
+    color: #333333;
+    padding: 2%;
+    height: 80%;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #acb6e5, #74ebd5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    margin: 2%;
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    transition: transform 0.5s ease;
+}
+
+.leftContent:hover {
+    transform: scale(1.02);
 }
 
 .firstArticle {
     height: 30%;
-    background-color: red;
+    width: 100%;
+    font-size: 2rem;
+}
+
+.firstArticle > h1 {
+    font-size: 4rem;
 }
 
 .secondArticle {
     height: 30%;
-    background-color: blue;
+    width: 100%;
+    font-size: 2rem;
+}
+
+.secondArticle > p {
+    font-weight: bold;
+    margin-top: 2%;
 }
 
 .thirdArticle {
     height: 30%;
-    background-color: green;
+    width: 100%;
+    font-size: 4rem;
+}
+
+.thirdArticle > p {
+    font-weight: bold;
 }
 
