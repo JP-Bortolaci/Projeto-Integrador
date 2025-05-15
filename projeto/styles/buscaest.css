@@ -1,0 +1,130 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    width: 360px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px;
+    width: 100%;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.results {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.results li {
+    background: linear-gradient(135deg, #f4f4f9, #e8e8f3);
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #444;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.results li:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo do Botão Voltar no canto superior esquerdo */
+.btn-back {
+    display: inline-block;
+    position: absolute; /* Para posicionar no canto superior esquerdo */
+    top: 30px;
+    left: 40px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #6c757d, #5a6268); /* Caixa cinza */
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #5a6268, #494f54); /* Efeito hover */
+}
+
+.btn-back:active {
+    background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de click */
+}
