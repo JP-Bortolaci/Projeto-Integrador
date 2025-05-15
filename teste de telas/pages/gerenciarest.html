@@ -4,54 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Itens</title>
-    <link rel="stylesheet" href="../styles/gerenciarest.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <script src="../js/ajax.js" defer></script>
 </head>
 <body>
-    <main class="main-container">
-        <h1 class="page-title">Gerenciar Itens</h1>
-        <a href="../pages/dashboard.html" class="btn-back">Voltar </a>
+    <main class="container">
+        <h1>Gerenciar Itens</h1>
+        <a href="dashboard.html" class="btn-back">Voltar</a>
         <section class="search-section">
             <label for="search">Buscar Item:</label>
             <input type="text" id="search" placeholder="Ex.: Parafuso M5">
-            <button>Buscar</button>
+            <button type="submit">Buscar</button>
         </section>
+
         <section class="results-section">
             <h2>Resultados:</h2>
-            <ul class="results">
-                <li>
-                    <strong>Parafuso M5</strong> - Localização: C1P1A1
-                    <div class="actions">
-                        <button class="btn-edit">Editar</button>
-                        <button class="btn-delete">Excluir</button>
-                    </div>
-                </li>
-                <li>
-                    <strong>Arruela Plana</strong> - Localização: C2P3A2
-                    <div class="actions">
-                        <button class="btn-edit">Editar</button>
-                        <button class="btn-delete">Excluir</button>
-                    </div>
-                </li>
-            </ul>
+            <ul class="results"></ul>
         </section>
+
         <section class="form-section">
-            <h2>Adicionar/Editar Item</h2>
-            <form>
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" placeholder="Ex.: Parafuso M5">
+            <h2>Adicionar Item</h2>
+            <form id="addItemForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Ex.: Parafuso M5">
 
-                <label for="reference">Referência:</label>
-                <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345">
+                <label for="referencia">Referência:</label>
+                <input type="text" id="referencia" name="referencia" placeholder="Ex.: REF12345">
 
-                <label for="location">Localização:</label>
-                <input type="text" id="location" name="location" placeholder="Ex.: C1P1A1">
+                <label for="localizacao">Localização:</label>
+                <input type="text" id="localizacao" name="localizacao" placeholder="Ex.: C1P1A1">
 
-                <div class="form-buttons">
-                    <button type="submit" class="btn-save">Salvar</button>
-                    <button type="button" class="btn-cancel">Cancelar</button>
-                </div>
+                <button type="submit">Adicionar Item</button>
             </form>
         </section>
     </main>
+
+    <script>
+        // Função para adicionar item via AJAX
+        document.getElementById('addItemForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const referencia = document.getElementById('referencia').value;
+            const localizacao = document.getElementById('localizacao').value;
+            adicionarItem(nome, referencia, localizacao);
+        });
+    </script>
 </body>
 </html>

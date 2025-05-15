@@ -1,0 +1,53 @@
+<!-- cadastro.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastrar Item</title>
+    <link rel="stylesheet" href="../styles/gerenciarest.css" />
+</head>
+<body>
+    <main class="main-container">
+        <h1>Cadastrar Novo Item</h1>
+        <form id="form-cadastro">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Ex.: Parafuso M5" required>
+
+            <label for="reference">Referência:</label>
+            <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345" required>
+
+            <label for="location">Localização:</label>
+            <input type="text" id="location" name="location" placeholder="Ex.: C1P1A1" required>
+
+            <button type="submit">Salvar</button>
+        </form>
+        <div id="msg"></div>
+    </main>
+
+    <script>
+        document.getElementById('form-cadastro').addEventListener('submit', function(e) {
+            e.preventDefault(); // evita o submit padrão
+
+            const formData = new FormData(this);
+
+            fetch('../includes/cadastrar.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const msg = document.getElementById('msg');
+                if(data.success) {
+                    msg.textContent = 'Item cadastrado com sucesso!';
+                    this.reset();
+                } else {
+                    msg.textContent = 'Erro: ' + data.message;
+                }
+            })
+            .catch(err => {
+                document.getElementById('msg').textContent = 'Erro na requisição: ' + err;
+            });
+        });
+    </script>
+</body>
+</html>

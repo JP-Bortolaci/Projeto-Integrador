@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buscar Itens</title>
+    <link rel="stylesheet" href="../styles/buscaest.css" />
+</head>
+<body>
+    <main class="container">
+        <h1>Buscar Itens</h1>
+        <a href="../pages/dashboard.html" class="btn-back">Voltar</a>
+
+        <label for="search">Pesquisar por nome ou referência:</label>
+        <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Ex.: Parafuso M5"
+            autocomplete="off"
+        />
+
+        <ul class="results" id="results"></ul>
+
+        <div id="location-display" style="margin-top: 20px; font-weight: bold;"></div>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const resultsList = document.getElementById('results');
+        const locationDisplay = document.getElementById('location-display');
+
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.trim();
+
+            if (term.length === 0) {
+                resultsList.innerHTML = '';
+                locationDisplay.textContent = '';
+                return;
+            }
+
+            fetch(`../includes/buscar_ajax.php?term=${encodeURIComponent(term)}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsList.innerHTML = '';
+                    locationDisplay.textContent = '';
+
+                    if (data.error) {
+                        resultsList.innerHTML = `<li>Erro: ${data.error}</li>`;
+                        return;
+                    }
+
+                    if (data.length === 0) {
+                        resultsList.innerHTML = '<li>Nenhum item encontrado</li>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = `${item.nome} (${item.referencia})`;
+                        li.style.cursor = 'pointer';
+                        li.addEventListener('click', () => {
+                            locationDisplay.textContent = `Localização do item: ${item.localizacao}`;
+                        });
+                        resultsList.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    resultsList.innerHTML = `<li>Erro na busca: ${err.message}</li>`;
+                });
+        });
+    </script>
+</body>
+</html>
