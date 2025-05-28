@@ -1,20 +1,29 @@
 <?php
-// login.php
+header('Content-Type: application/json');
+include 'conexao.php';
 
-$users = [
-    'admin' => '1234',
-    'user' => 'senha'
-];
+$data = json_decode(file_get_contents("php://input"), true);
+$login = $data['login'];
+$senha = $data['senha'];
 
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
+$sql = "SELECT senha, tipo FROM usuarios WHERE login = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $login);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Apenas para debug (remova em produção)
-file_put_contents("log.txt", "Usuário: $username - Senha: $password\n", FILE_APPEND);
-
-if (isset($users[$username]) && $users[$username] === $password) {
-    echo 'success';
+if ($row = $result->fetch_assoc()) {
+    if (password_verify($senha, $row['senha'])) {
+        echo json_encode([
+        "sucesso" => true,
+        "tipoUsuario" => $row['tipo']
+    ]);
+    } else {
+        echo json_encode(["sucesso" => false, "mensagem" => "Senha incorreta."]);
+    }
 } else {
-    echo 'error';
+    echo json_encode(["sucesso" => false, "mensagem" => "Usuário não encontrado."]);
 }
+
+$conn->close();
 ?>
