@@ -1,4 +1,3 @@
-<!-- cadastro.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,11 +21,18 @@
             <button type="submit">Salvar</button>
         </form>
         <div id="msg"></div>
+
+        <hr>
+
+        <h2>Buscar Itens</h2>
+        <input type="text" id="search" placeholder="Digite para buscar...">
+        <ul id="resultados"></ul>
     </main>
 
     <script>
+        // Cadastro de novo item
         document.getElementById('form-cadastro').addEventListener('submit', function(e) {
-            e.preventDefault(); // evita o submit padrão
+            e.preventDefault();
 
             const formData = new FormData(this);
 
@@ -38,16 +44,75 @@
             .then(data => {
                 const msg = document.getElementById('msg');
                 if(data.success) {
+                    msg.style.color = 'green';
                     msg.textContent = 'Item cadastrado com sucesso!';
                     this.reset();
+                    // Atualiza lista após cadastro
+                    searchInput.dispatchEvent(new Event('input'));
                 } else {
+                    msg.style.color = 'red';
                     msg.textContent = 'Erro: ' + data.message;
                 }
             })
             .catch(err => {
-                document.getElementById('msg').textContent = 'Erro na requisição: ' + err;
+                const msg = document.getElementById('msg');
+                msg.style.color = 'red';
+                msg.textContent = 'Erro na requisição: ' + err;
             });
         });
+
+        // Busca dinâmica
+        const searchInput = document.getElementById('search');
+        const resultados = document.getElementById('resultados');
+
+        searchInput.addEventListener('input', function () {
+            const query = this.value.trim();
+            if (query.length === 0) {
+                resultados.innerHTML = '';
+                return;
+            }
+
+            fetch(`../includes/busca.php?search=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultados.innerHTML = '';
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                                <strong>${item.nome}</strong> - ${item.localizacao}
+                                <button onclick="deletarItem(${item.id})" style="margin-left: 10px;">Excluir</button>
+                            `;
+                            resultados.appendChild(li);
+                        });
+                    } else {
+                        resultados.innerHTML = '<li>Nenhum item encontrado</li>';
+                    }
+                })
+                .catch(error => {
+                    resultados.innerHTML = '<li>Erro na busca</li>';
+                    console.error(error);
+                });
+        });
+
+        // Função para deletar item pelo id
+        function deletarItem(id) {
+            if (confirm('Deseja realmente excluir este item?')) {
+                fetch('../includes/deletar.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.success ? 'Item deletado com sucesso!' : 'Erro: ' + data.message);
+                    searchInput.dispatchEvent(new Event('input')); // Atualiza lista após exclusão
+                })
+                .catch(error => alert('Erro na exclusão: ' + error));
+            }
+        }
     </script>
 </body>
 </html>

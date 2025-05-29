@@ -1,17 +1,21 @@
 <?php
-// /includes/busca.php
+require 'conexao.php';
 
-include('conexao.php');
+$search = $_GET['search'] ?? '';
 
-$searchQuery = isset($_GET['search']) ? $_GET['search'] : '';
+if (!$search) {
+    echo json_encode([]);
+    exit;
+}
 
-// Prepara a consulta para buscar os itens que correspondem à pesquisa
-$query = "SELECT nome, localizacao FROM itens WHERE nome LIKE :search OR referencia LIKE :search";
-$stmt = $pdo->prepare($query);
-$stmt->execute(['search' => '%' . $searchQuery . '%']);
+try {
+    $stmt = $pdo->prepare("SELECT id, nome, referencia, localizacao FROM itens WHERE nome LIKE ? OR referencia LIKE ?");
+    $like = "%$search%";
+    $stmt->execute([$like, $like]);
+    $result = $stmt->fetchAll();
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Retorna os resultados como JSON
-echo json_encode($results);
+    echo json_encode($result);
+} catch (PDOException $e) {
+    echo json_encode(['error' => $e->getMessage()]);
+}
 ?>

@@ -14,7 +14,7 @@ function buscarItens(query) {
 
 function exibirResultados(results) {
     const resultsContainer = document.querySelector('.results');
-    resultsContainer.innerHTML = ''; // Limpa resultados anteriores
+    resultsContainer.innerHTML = ''; 
     results.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `<strong>${item.nome}</strong> - Localização: ${item.localizacao}`;

@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db   = 'estoque';
 $user = 'root';
-$pass = ''; // senha do seu xampp
+$pass = ''; // senha padrão do XAMPP
 $charset = 'utf8mb4';
 
 $options = [
@@ -13,5 +13,6 @@ $options = [
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=$charset", $user, $pass, $options);
 } catch (PDOException $e) {
-    die('Erro de conexão: ' . $e->getMessage());
+    die(json_encode(['success' => false, 'message' => 'Erro de conexão: ' . $e->getMessage()]));
 }
+?>
