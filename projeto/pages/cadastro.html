@@ -15,8 +15,12 @@
             <label for="reference">Referência:</label>
             <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345" required>
 
-            <label for="location">Localização:</label>
-            <input type="text" id="location" name="location" placeholder="Ex.: C1P1A1" required>
+            <label>Localização:</label>
+            <div class="location-inputs">
+                <div class="loc-item"><span>C</span><input type="number" id="corredor" name="corredor" min="1" max="9" required></div>
+                <div class="loc-item"><span>P</span><input type="number" id="prateleira" name="prateleira" min="1" max="9" required></div>
+                <div class="loc-item"><span>A</span><input type="number" id="altura" name="altura" min="1" max="9" required></div>
+            </div>
 
             <button type="submit">Salvar</button>
         </form>
@@ -30,11 +34,27 @@
     </main>
 
     <script>
-        // Cadastro de novo item
+        // Cadastro
         document.getElementById('form-cadastro').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const formData = new FormData(this);
+            const nome = this.name.value.trim();
+            const referencia = this.reference.value.trim();
+            const c = this.corredor.value.trim();
+            const p = this.prateleira.value.trim();
+            const a = this.altura.value.trim();
+
+            const location = `C${c}P${p}A${a}`;
+
+            if (!nome || !referencia || !c || !p || !a) {
+                document.getElementById('msg').textContent = 'Preencha todos os campos corretamente.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('name', nome);
+            formData.append('reference', referencia);
+            formData.append('location', location);
 
             fetch('../includes/cadastrar.php', {
                 method: 'POST',
@@ -44,24 +64,18 @@
             .then(data => {
                 const msg = document.getElementById('msg');
                 if(data.success) {
-                    msg.style.color = 'green';
                     msg.textContent = 'Item cadastrado com sucesso!';
                     this.reset();
-                    // Atualiza lista após cadastro
-                    searchInput.dispatchEvent(new Event('input'));
                 } else {
-                    msg.style.color = 'red';
                     msg.textContent = 'Erro: ' + data.message;
                 }
             })
             .catch(err => {
-                const msg = document.getElementById('msg');
-                msg.style.color = 'red';
-                msg.textContent = 'Erro na requisição: ' + err;
+                document.getElementById('msg').textContent = 'Erro na requisição: ' + err;
             });
         });
 
-        // Busca dinâmica
+        // Busca
         const searchInput = document.getElementById('search');
         const resultados = document.getElementById('resultados');
 
@@ -80,8 +94,8 @@
                         data.forEach(item => {
                             const li = document.createElement('li');
                             li.innerHTML = `
-                                <strong>${item.nome}</strong> - ${item.localizacao}
-                                <button onclick="deletarItem(${item.id})" style="margin-left: 10px;">Excluir</button>
+                                <strong>${item.nome}</strong> - ${item.referencia} - ${item.localizacao}
+                                <button onclick="deletarItem('${item.nome}')">Excluir</button>
                             `;
                             resultados.appendChild(li);
                         });
@@ -95,20 +109,20 @@
                 });
         });
 
-        // Função para deletar item pelo id
-        function deletarItem(id) {
-            if (confirm('Deseja realmente excluir este item?')) {
+        // Exclusão
+        function deletarItem(nome) {
+            if (confirm('Deseja realmente excluir o item "' + nome + '"?')) {
                 fetch('../includes/deletar.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ id })
+                    body: JSON.stringify({ nome })
                 })
                 .then(response => response.json())
                 .then(data => {
                     alert(data.success ? 'Item deletado com sucesso!' : 'Erro: ' + data.message);
-                    searchInput.dispatchEvent(new Event('input')); // Atualiza lista após exclusão
+                    searchInput.dispatchEvent(new Event('input')); // Atualiza a lista
                 })
                 .catch(error => alert('Erro na exclusão: ' + error));
             }

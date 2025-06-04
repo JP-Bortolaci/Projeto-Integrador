@@ -243,3 +243,24 @@ input:focus {
         padding: 0.4rem 0.6rem;
     }
 }
+
+.location-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.loc-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.loc-item input {
+    width: 3rem;
+    margin-top: 0.25rem;
+    text-align: center;
+}
