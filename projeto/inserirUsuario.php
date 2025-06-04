@@ -1,9 +1,9 @@
 <?php
 include 'conexao.php'; // conecta ao banco
 
-$login = "gestor1";
-$senha = password_hash("1234", PASSWORD_DEFAULT); // senha segura
-$tipo = "gestor"; // ou "funcionario"
+$login = "funcionario1";
+$senha = password_hash("4321", PASSWORD_DEFAULT); // senha segura
+$tipo = "funcionario"; // ou "funcionario"
 
 $sql = "INSERT INTO usuarios (login, senha, tipo) VALUES (?, ?, ?)";
 $stmt = $conn->prepare($sql);

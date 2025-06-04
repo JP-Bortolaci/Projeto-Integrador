@@ -1,6 +1,6 @@
 function fazerLogin() {
-            const login = document.getElementById("login").value;
-            const senha = document.getElementById("senha").value;
+            const login = document.getElementById("username").value;
+            const senha = document.getElementById("password").value;
 
             fetch("login.php", {
                 method: "POST",
@@ -11,7 +11,7 @@ function fazerLogin() {
             .then(data => {
                 if (data.sucesso) {
                     if (data.tipoUsuario === "gestor") {
-                        window.location.href = "pages/gerenciarest.html";
+                        window.location.href = "pages/cadastro.html";
                     } else if (data.tipoUsuario === "funcionario") {
                         window.location.href = "pages/busca.html";
                     } else {
