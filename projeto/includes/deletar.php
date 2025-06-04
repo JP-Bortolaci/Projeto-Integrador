@@ -1,9 +1,8 @@
 <?php
-require 'conexao.php';
+header('Content-Type: application/json');
+require_once 'conexao.php';
 
-// Lê dados JSON enviados via POST
 $data = json_decode(file_get_contents('php://input'), true);
-
 $id = $data['id'] ?? null;
 
 if (!$id) {

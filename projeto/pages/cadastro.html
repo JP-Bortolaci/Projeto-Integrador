@@ -10,16 +10,16 @@
         <h1>Cadastrar Novo Item</h1>
         <form id="form-cadastro">
             <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Ex.: Parafuso M5" required>
+            <input type="text" id="name" name="name" required>
 
             <label for="reference">Referência:</label>
-            <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345" required>
+            <input type="text" id="reference" name="reference" required>
 
             <label>Localização:</label>
             <div class="location-inputs">
-                <div class="loc-item"><span>C</span><input type="number" id="corredor" name="corredor" min="1" max="9" required></div>
-                <div class="loc-item"><span>P</span><input type="number" id="prateleira" name="prateleira" min="1" max="9" required></div>
-                <div class="loc-item"><span>A</span><input type="number" id="altura" name="altura" min="1" max="9" required></div>
+                <div class="loc-item"><span>C</span><input type="number" id="corredor" name="corredor" min="1" max="999" required></div>
+                <div class="loc-item"><span>P</span><input type="number" id="prateleira" name="prateleira" min="1" max="999" required></div>
+                <div class="loc-item"><span>A</span><input type="number" id="altura" name="altura" min="1" max="999" required></div>
             </div>
 
             <button type="submit">Salvar</button>
@@ -95,7 +95,7 @@
                             const li = document.createElement('li');
                             li.innerHTML = `
                                 <strong>${item.nome}</strong> - ${item.referencia} - ${item.localizacao}
-                                <button onclick="deletarItem('${item.nome}')">Excluir</button>
+                                <button onclick="deletarItem(${item.id})">Excluir</button>
                             `;
                             resultados.appendChild(li);
                         });
@@ -110,19 +110,19 @@
         });
 
         // Exclusão
-        function deletarItem(nome) {
-            if (confirm('Deseja realmente excluir o item "' + nome + '"?')) {
+        function deletarItem(id) {
+            if (confirm('Deseja realmente excluir este item?')) {
                 fetch('../includes/deletar.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ nome })
+                    body: JSON.stringify({ id })
                 })
                 .then(response => response.json())
                 .then(data => {
                     alert(data.success ? 'Item deletado com sucesso!' : 'Erro: ' + data.message);
-                    searchInput.dispatchEvent(new Event('input')); // Atualiza a lista
+                    searchInput.dispatchEvent(new Event('input'));
                 })
                 .catch(error => alert('Erro na exclusão: ' + error));
             }

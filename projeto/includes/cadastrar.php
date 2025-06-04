@@ -6,9 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-require_once 'conexao.php'; // arquivo que conecta ao banco
+require_once 'conexao.php';
 
-// Recebendo e sanitizando os dados
 $nome = trim($_POST['name'] ?? '');
 $referencia = trim($_POST['reference'] ?? '');
 $localizacao = trim($_POST['location'] ?? '');
@@ -27,3 +26,4 @@ try {
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'message' => 'Erro no banco: ' . $e->getMessage()]);
 }
+?>
