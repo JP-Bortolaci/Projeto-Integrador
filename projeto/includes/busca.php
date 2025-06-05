@@ -1,20 +1,14 @@
 <?php
-require 'conexao.php';
+require_once 'conexao.php';
 
 $search = $_GET['search'] ?? '';
 
-if (!$search) {
-    echo json_encode([]);
-    exit;
-}
-
 try {
     $stmt = $pdo->prepare("SELECT id, nome, referencia, localizacao FROM itens WHERE nome LIKE ? OR referencia LIKE ?");
-    $like = "%$search%";
-    $stmt->execute([$like, $like]);
-    $result = $stmt->fetchAll();
+    $stmt->execute(["%$search%", "%$search%"]);
+    $itens = $stmt->fetchAll();
 
-    echo json_encode($result);
+    echo json_encode($itens);
 } catch (PDOException $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }

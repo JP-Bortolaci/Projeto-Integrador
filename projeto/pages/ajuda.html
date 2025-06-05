@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajuda - Como Cadastrar Itens</title>
+    <link rel="stylesheet" href="../styles/ajuda.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #444;
+            margin-top: 30px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .etiquetas {
+            margin-top: 20px;
+        }
+
+        .btn-etiqueta {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .btn-etiqueta:hover {
+            background-color: #0056b3;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Como Cadastrar Itens Corretamente</h1>
+        <p>Esta página é um guia rápido para ajudar você a cadastrar seus itens no sistema da forma correta e manter seu estoque físico bem organizado.</p>
+
+        <h2>Campos do Formulário</h2>
+        <ul>
+            <li><strong>Nome:</strong> O nome do item. Exemplo: <em>Parafuso M5</em>, <em>Chave Philips</em>.</li>
+            <li><strong>Referência:</strong> Um código único ou identificação usada internamente. Exemplo: <em>REF1234</em>, <em>ABC-009</em>.</li>
+            <li><strong>Localização:</strong> Indica onde o item está fisicamente no seu estoque:</li>
+        </ul>
+
+        <p>
+            A localização é formada por três partes:
+            <ul>
+                <li><strong>C</strong>: Corredor</li>
+                <li><strong>P</strong>: Prateleira</li>
+                <li><strong>A</strong>: Altura na prateleira</li>
+            </ul>
+            Exemplo: <strong>C2P3A1</strong> significa Corredor 2, Prateleira 3, Altura 1.
+        </p>
+
+        <h2>Etiquetas para o Estoque Físico</h2>
+        <p>Recomendamos imprimir etiquetas com os códigos de localização (ex: C2P3A1) e colar nos locais físicos do estoque. Assim, ao buscar um item no sistema, você encontrará facilmente onde ele está armazenado.</p>
+
+        <div class="etiquetas">
+            <a href="../downloads/etiquetas_modelo.pdf" class="btn-etiqueta" target="_blank" download>Baixar Etiquetas Modelo (PDF)</a>
+        </div>
+
+        <a href="cadastro.html" class="back-link">← Voltar a pagina Cadastro</a>
+    </div>
+</body>
+</html>
