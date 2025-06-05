@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db   = 'estoque';
 $user = 'root';
-$pass = ''; // senha padrão do XAMPP
+$pass = '';
 $charset = 'utf8mb4';
 
 $options = [
