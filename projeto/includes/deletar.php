@@ -11,7 +11,7 @@ if (!$id) {
 }
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM itens WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM item WHERE id = ?");
     $stmt->execute([$id]);
 
     echo json_encode(['success' => true]);

@@ -1,0 +1,17 @@
+CRIAÇÃO DA TABELA "item"
+
+CREATE TABLE IF NOT EXISTS item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    referencia VARCHAR(100) NOT NULL,
+    localizacao VARCHAR(50) NOT NULL
+);
+
+CRIAÇÃO DA TABELA "usuarios"
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    tipo ENUM('gestor', 'funcionario') NOT NULL
+);

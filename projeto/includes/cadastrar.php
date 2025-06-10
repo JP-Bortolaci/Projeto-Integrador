@@ -18,7 +18,7 @@ if (empty($nome) || empty($referencia) || empty($localizacao)) {
 }
 
 try {
-    $sql = "INSERT INTO itens (nome, referencia, localizacao) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO item (nome, referencia, localizacao) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$nome, $referencia, $localizacao]);
 

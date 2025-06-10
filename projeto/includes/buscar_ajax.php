@@ -12,7 +12,7 @@ if ($searchTerm === '') {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT nome, referencia, localizacao FROM itens WHERE nome LIKE :term OR referencia LIKE :term LIMIT 10");
+    $stmt = $pdo->prepare("SELECT nome, referencia, localizacao FROM item WHERE nome LIKE :term OR referencia LIKE :term LIMIT 10");
     $likeTerm = "%$searchTerm%";
     $stmt->bindParam(':term', $likeTerm, PDO::PARAM_STR);
     $stmt->execute();
