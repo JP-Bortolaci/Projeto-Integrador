@@ -1,0 +1,137 @@
+# Sistema de Gerenciamento de Estoque
+
+## 1. Introdução
+
+Este sistema foi desenvolvido para auxiliar no gerenciamento de estoque de itens, com foco em praticidade, organização física e controle digital. Ele permite cadastrar, buscar e excluir itens com informações como nome, referência e localização física no estoque (Corredor, Prateleira, Altura).
+
+## 2. Objetivo
+
+Facilitar o controle de estoque para empresas ou usuários individuais, especialmente voltado para quem trabalha no almoxarifado, possibilitando o acesso via computador ou celular, sem necessidade de conhecimento técnico avançado.
+
+## 3. Funcionalidades
+
+- Cadastro de Itens
+- Busca de Itens por nome ou referência
+- Exclusão de Itens
+- Visualização da localização dos itens
+- Interface com botão de ajuda e explicações
+- Totalmente responsivo e leve para dispositivos móveis
+- Integração com banco de dados online gratuito
+
+## 4. Tecnologias Utilizadas
+
+- HTML5 / CSS3 (Front-end)
+- JavaScript (AJAX)
+- PHP (Back-end)
+- MySQL (Banco de Dados)
+- XAMPP (Ambiente local)
+- InfinityFree (Hospedagem gratuita)
+
+## 5. Estrutura de Pastas
+
+/
+├── index.html # Página inicial (opcional)
+├── pages/
+│ ├── cadastro.html # Tela de cadastro e busca
+│ ├── busca.html # Tela de busca para almoxarifado
+│ ├── ajuda.html # Explicações para o usuário
+├── includes/
+│ ├── conexao.php # Conexão com banco de dados
+│ ├── cadastrar.php # Cadastro de itens
+│ ├── busca.php # Busca de itens
+│ ├── deletar.php # Exclusão de itens
+├── styles/
+│ ├── cadastro.css # Estilo da tela de cadastro
+│ ├── buscaest.css # Estilo da tela de busca
+│ ├── ajuda.css # Estilo da tela de ajuda
+├── js/
+│ └── ajax.js # Requisições AJAX
+
+
+## 6. Cadastro de Itens
+
+Campos:
+
+- **Nome**: Nome do item (ex: Parafuso M5)
+- **Referência**: Código ou referência interna (ex: REF12345)
+- **Localização**:
+  - **C**: Corredor (número)
+  - **P**: Prateleira (número)
+  - **A**: Altura (número)
+
+### Exemplo de entrada:
+
+- Nome: Parafuso M5
+- Referência: REF12345
+- Localização: C2P3A1
+
+Resultado: o item será salvo com localização "C2P3A1".
+
+## 7. Busca de Itens
+
+- Busca instantânea por nome ou referência.
+- Ao clicar no item, exibe:
+  - Exemplo: `C2P3A1` → "Corredor 2, Prateleira 3, Altura 1".
+
+## 8. Exclusão de Itens
+
+- Permitida apenas na tela de cadastro.
+- Cada item listado possui um botão de exclusão.
+- Confirmação por alerta.
+
+## 9. Página de Ajuda
+
+- Explica ao usuário como preencher os campos corretamente.
+- Define os significados de C, P, A.
+- Recomenda o uso de etiquetas físicas no estoque.
+- Acessível pelo botão "Dúvidas?" no canto inferior esquerdo.
+
+## 10. Banco de Dados
+
+### Configuração (InfinityFree):
+
+- **Host**: sql213.infinityfree.com  
+- **Usuário**: if0_39211009  
+- **Senha**: (oculta)  
+- **Banco**: if0_39211009_estoque  
+- **Porta**: 3306 (opcional)
+
+### Estrutura da Tabela
+
+```sql
+CREATE TABLE itens (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  referencia VARCHAR(50) NOT NULL,
+  localizacao VARCHAR(20) NOT NULL
+);
+
+## 11. Conexão (includes/conexao.php)
+php
+Copy
+Edit
+<?php
+$host = "sql213.infinityfree.com";
+$dbname = "if0_39211009_estoque";
+$username = "if0_39211009";
+$password = "SUA_SENHA_AQUI";
+
+$conn = new mysqli($host, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Erro de conexão: " . $conn->connect_error);
+}
+?>
+
+###12. Considerações Finais
+Sistema leve e funcional, ideal para estoques pequenos.
+
+Fácil expansão futura (ex: login, exportação, histórico de movimentações).
+
+Acessível via navegador em qualquer dispositivo com internet.
+
+13. Créditos
+Desenvolvedor: Gustavo Andrade Eltz & João Pedro Bortolaci
+
+Ano: 2025
+
+Curso: Técnico em Informática – IENH
