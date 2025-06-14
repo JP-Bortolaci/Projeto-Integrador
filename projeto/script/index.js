@@ -2,7 +2,7 @@ function fazerLogin() {
     const login = document.getElementById("username").value;
     const senha = document.getElementById("password").value;
 
-    fetch("includes/login.php", {
+    fetch("../includes/login.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ login, senha })
@@ -11,9 +11,9 @@ function fazerLogin() {
     .then(data => {
         if (data.sucesso) {
             if (data.tipoUsuario === "gestor") {
-                window.location.href = "pages/cadastro.html";
+                window.location.href = "cadastro.html";
             } else if (data.tipoUsuario === "funcionario") {
-                window.location.href = "pages/busca.html";
+                window.location.href = "busca.html";
             } else {
                 alert("Tipo de usuário inválido.");
             }

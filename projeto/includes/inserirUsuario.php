@@ -1,9 +1,9 @@
 <?php
 require_once 'conexao.php'; // conecta ao banco via PDO
 
-$login = "gestor";
+$login = "funcionario1";
 $senha = password_hash("4321", PASSWORD_DEFAULT);
-$tipo = "gestor";
+$tipo = "funcionario";
 
 try {
     $sql = "INSERT INTO usuarios (login, senha, tipo) VALUES (?, ?, ?)";

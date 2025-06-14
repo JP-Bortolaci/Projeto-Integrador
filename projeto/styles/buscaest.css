@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    background: linear-gradient(90deg, #74ebd5, #acb6e5);
     margin: 0;
     padding: 0;
     display: flex;
@@ -123,8 +123,10 @@ button:active {
 
 .btn-back:hover {
     background: linear-gradient(135deg, #5a6268, #494f54); /* Efeito hover */
+    transform: scale(1.02);
 }
 
 .btn-back:active {
     background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de click */
+    transform: scale(0.96);
 }
