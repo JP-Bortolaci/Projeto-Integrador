@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(90deg, #74ebd5, #acb6e5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {    
+    background: #ffffff;
+    width: 40%;
+    height: 50%;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.5s ease;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Estilizando o texto "Login" */
+h2.login {
+    font-size: 3rem;
+    grid-column: 4/5;
+    grid-row: 2/3;
+    color: #333333;
+}
+
+/* Estilizando toda a caixa do usuário */
+.usernameSection {
+    display: grid;
+    grid-row: 3/4;
+    grid-column: 2/7;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(4, 25%);
+}
+
+/* Estilizando toda a caixa da senha */
+.passwordSection {
+    display: grid;
+    grid-row: 5/6;
+    grid-column: 2/7;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(4, 25%);
+}
+
+.userTypeSection {
+    display: grid;
+    grid-row: 7/8;
+    grid-column: 2/7;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(4, 25%);
+}
+
+/* Estilizando o botão "Entrar" */
+button {
+    grid-row: 9/10;
+    grid-column: 4/5;
+    height: 100%;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #00408a);
+    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* Estilizando a o "Usuário:" e "Senha:" */
+label {
+    grid-row: 1/2;
+    grid-column: 1/3;
+    color: #555555;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* Estilizando a área de usuário e senha */
+input, select {
+    margin-top: 1%;
+    height: 100%;
+    grid-row: 2/5;
+    grid-column: 1/6;
+    width: 100%;
+    padding: 2%;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.btn-back {
+    /* position: relative;
+    bottom: 30px; */
+    display: inline-block;
+    width: 60%;
+    height: 85%;
+    padding: 7% 5%;
+    background: linear-gradient(135deg, #6c757d, #5a6268); /* Caixa cinza */
+    color: white;
+    text-decoration: none;
+    font-size: 0.8vw;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    border: none;
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.btn-back:hover {
+    transform: scale(1.02);
+}
+
+.btn-back:active {
+    transform: scale(0.96);
+}

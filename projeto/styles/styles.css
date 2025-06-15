@@ -23,7 +23,7 @@ main.container {
     border-radius: 16px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.521);
     margin: auto;
-    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    background: linear-gradient(90deg, #74ebd5, #acb6e5);
     width: 80%;
     height: 80%;
     display: flex;

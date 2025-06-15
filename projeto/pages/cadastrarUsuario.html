@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="../styles/cadastrarUsuario.css">
 </head>
 <body>
-    
+    <main class="container">
+        <a href="../index.html" class="btn-back">Voltar</a>
+        <h2 class="login">Cadastrar</h2>
+        <section class="usernameSection">            
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
+        </section>
+        <section class="passwordSection">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+        </section>
+        <section class="userTypeSection">
+            <label for="tipoUsuario">Selecione o cargo:</label>
+            <select id="tipoUsuario" name="tipoUsuario" required> 
+                <option value="gestor">Gestor</option>
+                <option value="funcionario" selected>Funcionário</option>
+            </select>
+        </section>
+        <button type="submit" onclick="cadastrarUsuario()">Cadastrar</button>
+    </main>
+    <script src="../script/cadastrarUsuario.js"></script>
 </body>
 </html>
