@@ -24,51 +24,8 @@
 
         <div id="location-display" style="margin-top: 20px; font-weight: bold;"></div>
     </main>
-
-    <script>
-        const searchInput = document.getElementById('search');
-        const resultsList = document.getElementById('results');
-        const locationDisplay = document.getElementById('location-display');
-
-        searchInput.addEventListener('input', () => {
-            const term = searchInput.value.trim();
-
-            if (term.length === 0) {
-                resultsList.innerHTML = '';
-                locationDisplay.textContent = '';
-                return;
-            }
-
-            fetch(`../includes/buscar_ajax.php?term=${encodeURIComponent(term)}`)
-                .then(response => response.json())
-                .then(data => {
-                    resultsList.innerHTML = '';
-                    locationDisplay.textContent = '';
-
-                    if (data.error) {
-                        resultsList.innerHTML = `<li>Erro: ${data.error}</li>`;
-                        return;
-                    }
-
-                    if (data.length === 0) {
-                        resultsList.innerHTML = '<li>Nenhum item encontrado</li>';
-                        return;
-                    }
-
-                    data.forEach(item => {
-                        const li = document.createElement('li');
-                        li.textContent = `${item.nome} (${item.referencia})`;
-                        li.style.cursor = 'pointer';
-                        li.addEventListener('click', () => {
-                            locationDisplay.textContent = `Localização do item: ${item.localizacao}`;
-                        });
-                        resultsList.appendChild(li);
-                    });
-                })
-                .catch(err => {
-                    resultsList.innerHTML = `<li>Erro na busca: ${err.message}</li>`;
-                });
-        });
-    </script>
+    <!-- <h2>Planta do Estoque</h2> -->
+    <div class="estoque" id="estoque" style="display: none;"></div>
+    <script src="../script/busca.js"></script>
 </body>
 </html>

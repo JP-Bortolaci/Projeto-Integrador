@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 100vh;
 }
@@ -130,3 +130,46 @@ button:active {
     background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de click */
     transform: scale(0.96);
 }
+
+
+/* Planta 2D */
+.estoque {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    /* gap: 5px; */
+    transition: all 0.5s ease-in;
+  }
+
+  .prateleira {
+    width: 50px;
+    height: 25px;
+    background-color: #888;
+    border: 1px solid #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    border-radius: 5px;
+  }
+
+  .corredor {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    /* border-top: 3px solid #000000;
+    border-bottom: 3px solid #000000; */
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border-radius: 4px; */
+  }
+
+  .destacado {
+    background-color: #3bd140 !important;
+    border: 1px solid #3bd140;
+    color: white;
+    font-weight: bold;
+  }
