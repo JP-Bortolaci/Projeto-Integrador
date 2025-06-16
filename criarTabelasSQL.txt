@@ -15,3 +15,8 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL,
     tipo ENUM('gestor', 'funcionario') NOT NULL
 );
+
+INSERIR USUÁRIOS PADRÃO
+
+INSERT INTO usuarios (login, senha, tipo) VALUES ("gestor1", "4321", "gestor");
+INSERT INTO usuarios (login, senha, tipo) VALUES ("funcionario1", "4321", "funcionario");
