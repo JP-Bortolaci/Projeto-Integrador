@@ -49,30 +49,30 @@ const estoque = document.getElementById("estoque");
 let corredorAtual = 1;
 
 for (let bloco = 0; bloco < 4; bloco++) {
-// 2 linhas de prateleiras por corredor (C1 a C4)
-for (let linha = 0; linha < 2; linha++) {
-    // Adiciona linha de corredor entre blocos (exceto após o último)
-    if (bloco < 4 && linha == 1) {
-        for (let i = 0; i < 8; i++) {
-            const corredor = document.createElement("div");
-            corredor.className = "corredor";
-            corredor.textContent = "";
-            estoque.appendChild(corredor);
+    // 2 linhas de prateleiras por corredor (C1 a C4)
+    for (let linha = 0; linha < 2; linha++) {
+        // Adiciona linha de corredor entre blocos (exceto após o último)
+        if (bloco < 4 && linha == 1) {
+            for (let i = 0; i < 8; i++) {
+                const corredor = document.createElement("div");
+                corredor.className = "corredor";
+                corredor.textContent = "";
+                estoque.appendChild(corredor);
+            }
+        }
+        for (let p = 1; p <= 8; p++) {
+            const div = document.createElement("div");
+            const prateleiraNum = (linha * 8 + p); // P1 a P8 por corredor
+            const id = `C${corredorAtual}P${prateleiraNum}`;
+
+            div.className = "prateleira";
+            div.id = id;
+            div.textContent = id;
+
+            estoque.appendChild(div);
         }
     }
-    for (let p = 1; p <= 8; p++) {
-        const div = document.createElement("div");
-        const prateleiraNum = (linha * 8 + p); // P1 a P8 por corredor
-        const id = `C${corredorAtual}P${prateleiraNum}`;
-
-        div.className = "prateleira";
-        div.id = id;
-        div.textContent = id;
-
-        estoque.appendChild(div);
-    }
-}
-corredorAtual++;
+    corredorAtual++;
 }
 
 // Função para destacar uma prateleira

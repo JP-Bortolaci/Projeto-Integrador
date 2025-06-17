@@ -138,25 +138,34 @@ button:active {
     grid-template-columns: repeat(8, 1fr);
     /* gap: 5px; */
     transition: all 0.5s ease-in;
+    background-color: #ffffff;
+    width: 30%;
+    height: 80%;
+    border: 30px solid #ffffff;
+    border-radius: 16px;
+    transform: rotate(90deg);
   }
 
   .prateleira {
-    width: 50px;
-    height: 25px;
-    background-color: #888;
-    border: 1px solid #888;
+    /* width: 70%; */
+    height: 50px;
+    margin: 2px 0;
+    background-color: #88888881;
+    border: 1px solid #88888881;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
     border-radius: 5px;
+    transform: rotate(-90deg);
   }
 
   .corredor {
-    width: 50px;
-    height: 50px;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
+    /* width: 50px; */
+    margin: auto 0;
+    height: 20px;
+    background-color: #7c7c7c46;
+    border: 1px solid #7c7c7c00;
     /* border-top: 3px solid #000000;
     border-bottom: 3px solid #000000; */
     color: white;
