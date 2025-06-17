@@ -144,11 +144,16 @@ button:active {
     border: 30px solid #ffffff;
     border-radius: 16px;
     transform: rotate(90deg);
-  }
+}
 
-  .prateleira {
+.prateleiraSpan {
+    display: inline-block;
+    transform: rotate(-90deg);
+}
+
+.prateleira {
     /* width: 70%; */
-    height: 50px;
+    /* height: 50px; */
     margin: 2px 0;
     background-color: #88888881;
     border: 1px solid #88888881;
@@ -157,10 +162,15 @@ button:active {
     justify-content: center;
     font-size: 11px;
     border-radius: 5px;
-    transform: rotate(-90deg);
-  }
+    /* transform: rotate(-90deg); */
+}
 
-  .corredor {
+.corredorSpan {
+    display: inline-block;
+    transform: rotate(-90deg);
+}
+
+.corredor {
     /* width: 50px; */
     margin: auto 0;
     height: 20px;
@@ -174,11 +184,12 @@ button:active {
     align-items: center;
     justify-content: center;
     /* border-radius: 4px; */
-  }
 
-  .destacado {
+}
+
+.destacado {
     background-color: #3bd140 !important;
     border: 1px solid #3bd140;
     color: white;
     font-weight: bold;
-  }
+}

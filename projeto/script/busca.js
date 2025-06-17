@@ -55,21 +55,32 @@ for (let bloco = 0; bloco < 4; bloco++) {
         if (bloco < 4 && linha == 1) {
             for (let i = 0; i < 8; i++) {
                 const corredor = document.createElement("div");
+                const corredorSpan = document.createElement("span");
                 corredor.className = "corredor";
-                corredor.textContent = "";
+                corredorSpan.className = "corredorSpan";
+                if (i == 2 || i == 5) {
+                    corredorSpan.textContent = `C${corredorAtual}`
+                } else {
+                    corredorSpan.textContent = "";
+                }
                 estoque.appendChild(corredor);
+                corredor.appendChild(corredorSpan);
             }
         }
         for (let p = 1; p <= 8; p++) {
-            const div = document.createElement("div");
+            const prateleira = document.createElement("div");
+            const prateleiraSpan = document.createElement("span");
             const prateleiraNum = (linha * 8 + p); // P1 a P8 por corredor
             const id = `C${corredorAtual}P${prateleiraNum}`;
 
-            div.className = "prateleira";
-            div.id = id;
-            div.textContent = id;
 
-            estoque.appendChild(div);
+            prateleira.className = "prateleira";
+            prateleira.id = id;
+            prateleiraSpan.className = "prateleiraSpan";
+            prateleiraSpan.textContent = `P${prateleiraNum}`;
+
+            estoque.appendChild(prateleira);
+            prateleira.appendChild(prateleiraSpan);
         }
     }
     corredorAtual++;
