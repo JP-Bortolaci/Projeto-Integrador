@@ -186,7 +186,8 @@ button:active {
 /* Cada prateleira */
 .prateleira {
     margin: 2px 0;
-    background: radial-gradient(rgba(128, 128, 128, 0.089), rgba(119, 119, 119, 0.774));
+    background: radial-gradient(rgba(128, 128, 128, 0.041), rgba(119, 119, 119, 0.473));
+    background-color: rgb(255, 238, 191);
     /* border: 1px solid #88888881; */
     display: flex;
     align-items: center;
