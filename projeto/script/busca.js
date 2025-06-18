@@ -32,7 +32,7 @@ searchInput.addEventListener('input', () => {
                 li.textContent = `${item.nome} (${item.referencia})`;
                 li.style.cursor = 'pointer';
                 li.addEventListener('click', () => {
-                    locationDisplay.textContent = `Localização do item: ${item.localizacao}`;
+                    locationDisplay.textContent = `Localização do item: ${item.localizacao.match(/A\d+/)}`;
                     localizarPeca(item.localizacao);
                 });
                 resultsList.appendChild(li);
@@ -67,7 +67,7 @@ for (let bloco = 0; bloco < 4; bloco++) {
                 corredor.appendChild(corredorSpan);
             }
         }
-        for (let p = 1; p <= 8; p++) {
+        for (let p = 8; p >= 1; p--) {
             const prateleira = document.createElement("div");
             const prateleiraSpan = document.createElement("span");
             const prateleiraNum = (linha * 8 + p); // P1 a P8 por corredor

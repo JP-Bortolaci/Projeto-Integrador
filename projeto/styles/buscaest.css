@@ -133,63 +133,96 @@ button:active {
 
 
 /* Planta 2D */
-.estoque {
+.planta2d {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    /* gap: 5px; */
+    grid-template-columns: repeat(10, 1fr);
     transition: all 0.5s ease-in;
-    background-color: #ffffff;
-    width: 30%;
-    height: 80%;
-    border: 30px solid #ffffff;
+    background-color: #ffffff67;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.384);
+    width: 80vh;
+    height: 45vw;
     border-radius: 16px;
-    transform: rotate(90deg);
-}
-
-.prateleiraSpan {
-    display: inline-block;
     transform: rotate(-90deg);
 }
 
+/* Área de expedição dentro da planta */
+.expedicao {
+    background: radial-gradient(rgba(139, 139, 139, 0.411), rgba(128, 128, 128, 0.349));
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.411); */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    grid-column: 9/11;
+    display: flex;
+    /* background: #33333349; */
+    margin: 10%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+/* Texto dentro da área de expedição */
+.expedicao > h2 {
+    transform:rotate(90deg);
+}
+
+/* Todos os corredores */
+.estoque {
+    margin: auto;
+    display: grid;
+    grid-column: 2/9;
+    grid-template-columns: repeat(8, 1fr);
+    transition: all 0.5s ease-in;
+    width: 100%;
+    height: 96.5%;
+    border-radius: 16px;
+}
+
+/* Texto dentro de cada prateleira */
+.prateleiraSpan {
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
+/* Cada prateleira */
 .prateleira {
-    /* width: 70%; */
-    /* height: 50px; */
     margin: 2px 0;
-    background-color: #88888881;
-    border: 1px solid #88888881;
+    background: radial-gradient(rgba(128, 128, 128, 0.089), rgba(119, 119, 119, 0.774));
+    /* border: 1px solid #88888881; */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
     border-radius: 5px;
-    /* transform: rotate(-90deg); */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.411);
 }
 
+/* Texto dentro de cada corredor */
 .corredorSpan {
     display: inline-block;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
 
+/* Cada corredor */
 .corredor {
-    /* width: 50px; */
     margin: auto 0;
     height: 20px;
-    background-color: #7c7c7c46;
-    border: 1px solid #7c7c7c00;
-    /* border-top: 3px solid #000000;
-    border-bottom: 3px solid #000000; */
+    background-color: #7c7c7c86;
+    border: 2px solid #7c7c7c00;
     color: white;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border-radius: 4px; */
-
 }
 
+/* Prateleira a ser destacada ao rodar a função */
 .destacado {
-    background-color: #3bd140 !important;
-    border: 1px solid #3bd140;
+    transition: all 0.7s ease;
+    background: radial-gradient(#2f93ff,#000000ad) !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.411);
+    /* background-color: #3bd140 !important; */
+    /* border: 1px solid #3bd140; */
     color: white;
     font-weight: bold;
 }
