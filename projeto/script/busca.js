@@ -53,12 +53,12 @@ for (let bloco = 0; bloco < 4; bloco++) {
     for (let linha = 0; linha < 2; linha++) {
         // Adiciona linha de corredor entre blocos (exceto após o último)
         if (bloco < 4 && linha == 1) {
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 5; i++) {
                 const corredor = document.createElement("div");
                 const corredorSpan = document.createElement("span");
                 corredor.className = "corredor";
                 corredorSpan.className = "corredorSpan";
-                if (i == 2 || i == 5) {
+                if (i == 1 || i == 3) {
                     corredorSpan.textContent = `C${corredorAtual}`
                 } else {
                     corredorSpan.textContent = "";
@@ -67,10 +67,10 @@ for (let bloco = 0; bloco < 4; bloco++) {
                 corredor.appendChild(corredorSpan);
             }
         }
-        for (let p = 8; p >= 1; p--) {
+        for (let p = 5; p >= 1; p--) {
             const prateleira = document.createElement("div");
             const prateleiraSpan = document.createElement("span");
-            const prateleiraNum = (linha * 8 + p); // P1 a P8 por corredor
+            const prateleiraNum = (linha * 5 + p); // P1 a P8 por corredor
             const id = `C${corredorAtual}P${prateleiraNum}`;
 
 
