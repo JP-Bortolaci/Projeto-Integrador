@@ -1,122 +1,398 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <title>Cadastrar Item</title>
-    <link rel="stylesheet" href="../styles/cadastro.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Item - Gerenciamento de Estoque 2D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .main-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(107, 114, 128, 0.6);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(90deg, #ef4444, #f87171);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.6);
+        }
+        
+        .btn-back {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            transform: translateX(-3px);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(#2563eb, #7c3aed);
+        }
+        
+        /* Floating action buttons */
+        .fab {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .fab:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Item list animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .item-list li {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        .item-list li:nth-child(1) { animation-delay: 0.1s; }
+        .item-list li:nth-child(2) { animation-delay: 0.2s; }
+        .item-list li:nth-child(3) { animation-delay: 0.3s; }
+        .item-list li:nth-child(4) { animation-delay: 0.4s; }
+        .item-list li:nth-child(5) { animation-delay: 0.5s; }
+    </style>
 </head>
-<body>
-    <main class="main-container">
-        <a href="../index.html" class="btn-back">Voltar</a>
-        <h1>Cadastrar Novo Item</h1>
-        <form id="form-cadastro">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Ex.: Parafuso M5" required>
-
-            <label for="reference">Referência:</label>
-            <input type="text" id="reference" name="reference" placeholder="Ex.: REF12345" required>
-
-            <label>Localização:</label>
-            <div class="location-inputs">
-                <div class="loc-item"><span>C</span><input type="number" id="corredor" name="corredor" min="1" required></div>
-                <div class="loc-item"><span>P</span><input type="number" id="prateleira" name="prateleira" min="1" required></div>
-                <div class="loc-item"><span>A</span><input type="number" id="altura" name="altura" min="1" required></div>
+<body class="overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed -left-20 -top-20 w-64 h-64 rounded-full bg-blue-100 opacity-40"></div>
+    <div class="fixed -right-20 -bottom-20 w-96 h-96 rounded-full bg-purple-100 opacity-40"></div>
+    
+    <!-- Main content -->
+    <main class="min-h-screen flex items-start justify-center p-4 md:p-8 relative z-10 pt-20">
+        <div class="main-card rounded-2xl p-6 md:p-8 w-full max-w-4xl relative overflow-hidden mb-10">
+            <!-- Decorative elements -->
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-blue-100 opacity-20"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-purple-100 opacity-20"></div>
+            
+            <!-- Back button -->
+            <a href="../index.html" class="btn-back flex items-center text-blue-600 mb-6 w-max">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar
+            </a>
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold gradient-text">Cadastrar Novo Item</h1>
+                    <p class="text-gray-500">Adicione novos itens ao seu estoque</p>
+                </div>
+                <div class="floating hidden md:block">
+                    <div class="bg-white p-4 rounded-2xl shadow-lg">
+                        <i class="fas fa-boxes text-4xl gradient-text"></i>
+                    </div>
+                </div>
             </div>
-
-            <button type="submit" class="btn-save">Salvar</button>
-        </form>
-        <div id="msg"></div>
-
-        <hr>
-
-        <h2>Buscar Itens</h2>
-        <input type="text" id="search" placeholder="Digite para buscar...">
-        <ul id="resultados"></ul>
+            
+            <!-- Form section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Cadastro form -->
+                <div>
+                    <form id="form-cadastro" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome do Item</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-box text-gray-400"></i>
+                                </div>
+                                <input type="text" id="name" name="name" 
+                                       class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                       placeholder="Ex.: Parafuso M5" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="reference" class="block text-sm font-medium text-gray-700 mb-1">Referência</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-barcode text-gray-400"></i>
+                                </div>
+                                <input type="text" id="reference" name="reference" 
+                                       class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                       placeholder="Ex.: REF12345" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Localização</label>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 font-bold">C</span>
+                                    </div>
+                                    <input type="number" id="corredor" name="corredor" min="1" 
+                                           class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                           placeholder="Corredor" required>
+                                </div>
+                                
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 font-bold">P</span>
+                                    </div>
+                                    <input type="number" id="prateleira" name="prateleira" min="1" 
+                                           class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                           placeholder="Prateleira" required>
+                                </div>
+                                
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-400 font-bold">A</span>
+                                    </div>
+                                    <input type="number" id="altura" name="altura" min="1" 
+                                           class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                           placeholder="Altura" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="btn-primary w-full py-3 px-4 rounded-lg text-white font-semibold shadow-md">
+                                <i class="fas fa-save mr-2"></i> Salvar Item
+                            </button>
+                        </div>
+                        
+                        <div id="msg" class="text-center text-sm py-2 rounded-lg"></div>
+                    </form>
+                </div>
+                
+                <!-- Search section -->
+                <div>
+                    <h2 class="text-2xl font-bold gradient-text mb-4">Buscar Itens</h2>
+                    
+                    <div class="relative mb-6">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input type="text" id="search" 
+                               class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                               placeholder="Digite nome, referência ou localização...">
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-70 rounded-lg p-4 h-64 overflow-y-auto">
+                        <ul id="resultados" class="item-list space-y-2"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-
-    <!-- Botão de ajuda fixo -->
-    <a href="ajuda.html" class="btnAjuda btnFixa">Dúvidas?</a>
-    <a href="cadastrarUsuario.html" class="btnCadastro btnFixa">Cadastrar usuário</a>
-
+    
+    <!-- Floating action buttons -->
+    <a href="ajuda.html" class="fab fixed bottom-6 right-6 md:right-auto md:left-6 bg-blue-500 text-white p-4 rounded-full shadow-lg z-20">
+        <i class="fas fa-question text-xl"></i>
+    </a>
+    
+    <a href="cadastrarUsuario.html" class="fab fixed bottom-6 right-24 md:right-auto md:left-24 bg-purple-500 text-white p-4 rounded-full shadow-lg z-20">
+        <i class="fas fa-user-plus text-xl"></i>
+    </a>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-boxes text-xl text-blue-400 mr-2"></i>
+                    <span class="text-lg font-bold">Estoque 2D</span>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm">© 2023 Estoque 2D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
     <script>
         // Cadastro
         document.getElementById('form-cadastro').addEventListener('submit', function(e) {
             e.preventDefault();
-
+            
+            // Show loading state
+            const btn = this.querySelector('button[type="submit"]');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Salvando...';
+            btn.disabled = true;
+            
             const nome = this.name.value.trim();
             const referencia = this.reference.value.trim();
             const c = this.corredor.value.trim();
             const p = this.prateleira.value.trim();
             const a = this.altura.value.trim();
-
+            
             const location = `C${c}P${p}A${a}`;
-
+            
             if (!nome || !referencia || !c || !p || !a) {
-                document.getElementById('msg').textContent = 'Preencha todos os campos corretamente.';
+                showMessage('Preencha todos os campos corretamente.', 'error');
+                resetButton(btn, originalBtnText);
                 return;
             }
-
+            
             const formData = new FormData();
             formData.append('name', nome);
             formData.append('reference', referencia);
             formData.append('location', location);
-
+            
             fetch('../includes/cadastrar.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                const msg = document.getElementById('msg');
                 if(data.success) {
-                    msg.textContent = 'Item cadastrado com sucesso!';
+                    showMessage('Item cadastrado com sucesso!', 'success');
                     this.reset();
+                    
+                    // Trigger search to update list
+                    const searchInput = document.getElementById('search');
+                    if(searchInput.value) {
+                        searchInput.dispatchEvent(new Event('input'));
+                    }
                 } else {
-                    msg.textContent = 'Erro: ' + data.message;
+                    showMessage('Erro: ' + data.message, 'error');
                 }
             })
             .catch(err => {
-                document.getElementById('msg').textContent = 'Erro na requisição: ' + err;
+                showMessage('Erro na requisição: ' + err, 'error');
+            })
+            .finally(() => {
+                resetButton(btn, originalBtnText);
             });
         });
-
+        
         // Busca
         const searchInput = document.getElementById('search');
         const resultados = document.getElementById('resultados');
-
+        
         searchInput.addEventListener('input', function () {
             const query = this.value.trim();
             if (query.length === 0) {
-                resultados.innerHTML = '';
+                resultados.innerHTML = '<li class="text-gray-500 text-center py-4">Digite para buscar itens</li>';
                 return;
             }
-
+            
+            // Show loading state
+            resultados.innerHTML = '<li class="text-center py-4"><i class="fas fa-spinner fa-spin text-blue-500"></i></li>';
+            
             fetch(`../includes/busca.php?search=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     resultados.innerHTML = '';
+                    
                     if (data.length > 0) {
                         data.forEach(item => {
                             const li = document.createElement('li');
+                            li.className = 'bg-white bg-opacity-70 rounded-lg p-3 flex justify-between items-center';
                             li.innerHTML = `
-                                <strong>${item.nome}</strong> - ${item.referencia} - ${item.localizacao}
-                                <button onclick="deletarItem('${item.id}')">Excluir</button>
+                                <div>
+                                    <div class="font-bold text-blue-600">${item.nome}</div>
+                                    <div class="text-sm text-gray-600">
+                                        <span class="font-medium">Ref:</span> ${item.referencia} | 
+                                        <span class="font-medium">Local:</span> ${item.localizacao}
+                                    </div>
+                                </div>
+                                <button onclick="deletarItem('${item.id}')" class="btn-danger text-white text-sm py-1 px-3 rounded-full">
+                                    <i class="fas fa-trash-alt mr-1"></i> Excluir
+                                </button>
                             `;
                             resultados.appendChild(li);
                         });
                     } else {
-                        resultados.innerHTML = '<li>Nenhum item encontrado</li>';
+                        resultados.innerHTML = '<li class="text-gray-500 text-center py-4">Nenhum item encontrado</li>';
                     }
                 })
                 .catch(error => {
-                    resultados.innerHTML = '<li>Erro na busca</li>';
+                    resultados.innerHTML = '<li class="text-red-500 text-center py-4">Erro na busca</li>';
                     console.error(error);
                 });
         });
-
+        
+        // Initialize empty search state
+        resultados.innerHTML = '<li class="text-gray-500 text-center py-4">Digite para buscar itens</li>';
+        
         // Exclusão
         function deletarItem(id) {
             if (confirm('Deseja realmente excluir este item?')) {
+                // Show loading on the button
+                const btn = event.target.closest('button');
+                const originalBtnText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                btn.disabled = true;
+                
                 fetch('../includes/deletar.php', {
                     method: 'POST',
                     headers: {
@@ -126,11 +402,59 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.success ? 'Item deletado com sucesso!' : 'Erro: ' + data.message);
-                    searchInput.dispatchEvent(new Event('input'));
+                    if(data.success) {
+                        showMessage('Item deletado com sucesso!', 'success');
+                        
+                        // Remove the item from the list
+                        const itemElement = btn.closest('li');
+                        itemElement.style.opacity = '0';
+                        itemElement.style.transform = 'translateX(20px)';
+                        setTimeout(() => {
+                            itemElement.remove();
+                            
+                            // If no items left, show message
+                            if(resultados.children.length === 0) {
+                                resultados.innerHTML = '<li class="text-gray-500 text-center py-4">Nenhum item encontrado</li>';
+                            }
+                        }, 300);
+                    } else {
+                        showMessage('Erro: ' + data.message, 'error');
+                    }
                 })
-                .catch(error => alert('Erro na exclusão: ' + error));
+                .catch(error => {
+                    showMessage('Erro na exclusão: ' + error, 'error');
+                })
+                .finally(() => {
+                    btn.innerHTML = originalBtnText;
+                    btn.disabled = false;
+                });
             }
+        }
+        
+        // Helper functions
+        function showMessage(message, type) {
+            const msgElement = document.getElementById('msg');
+            msgElement.textContent = message;
+            msgElement.className = 'text-center text-sm py-2 rounded-lg ';
+            
+            if(type === 'success') {
+                msgElement.classList.add('bg-green-100', 'text-green-700');
+            } else if(type === 'error') {
+                msgElement.classList.add('bg-red-100', 'text-red-700');
+            } else {
+                msgElement.classList.add('bg-blue-100', 'text-blue-700');
+            }
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                msgElement.textContent = '';
+                msgElement.className = 'text-center text-sm py-2 rounded-lg';
+            }, 5000);
+        }
+        
+        function resetButton(btn, originalText) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
         }
     </script>
 </body>

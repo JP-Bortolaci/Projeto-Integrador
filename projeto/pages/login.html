@@ -3,26 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../styles/login.css">
+    <title>Login - Gerenciamento de Estoque 2D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .login-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-login {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
+        }
+        
+        .btn-back {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            transform: translateX(-3px);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
-<body>
-    <main class="container">
-            <form id="login-form">
-                <a href="../index.html" class="btn-back">Voltar</a>
-                <h2 class="login">Login</h2>
-                <section class="usernameSection">
-                    <label for="username">Usuário:</label>
-                    <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
-                </section>
-                <section class="passwordSection">    
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-                </section>    
-                <button type="button" onclick="fazerLogin()">Entrar</button>
-                <p id="login-message"></p>
+<body class="overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed -left-20 -top-20 w-64 h-64 rounded-full bg-blue-100 opacity-40"></div>
+    <div class="fixed -right-20 -bottom-20 w-96 h-96 rounded-full bg-purple-100 opacity-40"></div>
+    
+    <!-- Main content -->
+    <main class="min-h-screen flex items-center justify-center p-4 relative z-10">
+        <div class="login-card rounded-2xl p-8 md:p-12 w-full max-w-md relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-blue-100 opacity-20"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-purple-100 opacity-20"></div>
+            
+            <!-- Back button -->
+            <a href="../index.html" class="btn-back flex items-center text-blue-600 mb-6 w-max">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar
+            </a>
+            
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <div class="floating">
+                    <div class="bg-white p-5 rounded-2xl shadow-lg">
+                        <i class="fas fa-boxes text-5xl gradient-text"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Login form -->
+            <form id="login-form" class="space-y-6">
+                <h2 class="text-3xl font-bold text-center gradient-text mb-2">Login</h2>
+                <p class="text-center text-gray-500 mb-8">Acesse sua conta para gerenciar seu estoque</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Usuário</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="username" name="username" 
+                                   class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                   placeholder="Digite seu usuário" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password" 
+                                   class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                                   placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-700">Lembrar-me</label>
+                    </div>
+                    
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+                
+                <button type="button" onclick="fazerLogin()" 
+                        class="btn-login w-full py-3 px-4 rounded-lg text-white font-semibold shadow-md">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Entrar
+                </button>
+                
+                <p id="login-message" class="text-center text-sm text-gray-500 mt-4"></p>
+                
+                <div class="text-center text-sm text-gray-500">
+                    Não tem uma conta? <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Fale com o administrador</a>
+                </div>
             </form>
+        </div>
     </main>
-    <script src="../script/login.js"></script>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-boxes text-xl text-blue-400 mr-2"></i>
+                    <span class="text-lg font-bold">Estoque 2D</span>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm">© 2023 Estoque 2D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function fazerLogin() {
+            const login = document.getElementById("username").value;
+            const senha = document.getElementById("password").value;
+            
+            // Show loading state
+            const btn = document.querySelector('button[type="button"]');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Entrando...';
+            btn.disabled = true;
+            
+            fetch("../includes/login.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ login, senha })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.sucesso) {
+                    // Success animation
+                    btn.innerHTML = '<i class="fas fa-check mr-2"></i> Sucesso!';
+                    btn.classList.remove('btn-login');
+                    btn.classList.add('bg-green-500');
+                    
+                    // Redirect after short delay
+                    setTimeout(() => {
+                        if (data.tipoUsuario === "gestor") {
+                            window.location.href = "cadastro.html";
+                        } else if (data.tipoUsuario === "funcionario") {
+                            window.location.href = "busca.html";
+                        } else {
+                            alert("Tipo de usuário inválido.");
+                            resetButton(btn, originalBtnText);
+                        }
+                    }, 1000);
+                } else {
+                    // Error state
+                    btn.innerHTML = '<i class="fas fa-times mr-2"></i> Falha no login';
+                    btn.classList.remove('btn-login');
+                    btn.classList.add('bg-red-500');
+                    
+                    // Show error message
+                    const message = document.getElementById('login-message');
+                    message.textContent = data.mensagem || "Credenciais inválidas. Por favor, tente novamente.";
+                    message.classList.add('text-red-500');
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        resetButton(btn, originalBtnText);
+                        message.textContent = '';
+                        message.classList.remove('text-red-500');
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                
+                btn.innerHTML = '<i class="fas fa-times mr-2"></i> Erro de conexão';
+                btn.classList.remove('btn-login');
+                btn.classList.add('bg-red-500');
+                
+                const message = document.getElementById('login-message');
+                message.textContent = "Erro na conexão com o servidor.";
+                message.classList.add('text-red-500');
+                
+                setTimeout(() => {
+                    resetButton(btn, originalBtnText);
+                    message.textContent = '';
+                    message.classList.remove('text-red-500');
+                }, 3000);
+            });
+        }
+        
+        function resetButton(btn, originalText) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('bg-green-500', 'bg-red-500');
+            btn.classList.add('btn-login');
+        }
+        
+        // Add enter key functionality
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                fazerLogin();
+            }
+        });
+    </script>
 </body>
 </html>

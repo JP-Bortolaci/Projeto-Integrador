@@ -1,36 +1,495 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Buscar Itens</title>
-    <link rel="stylesheet" href="../styles/buscaest.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca 2D - Gerenciamento de Estoque 2D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .main-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(107, 114, 128, 0.6);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(90deg, #ef4444, #f87171);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.6);
+        }
+        
+        .btn-back {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            transform: translateX(-3px);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Estoque 2D styles */
+        .estoque-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 1fr;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .corredor {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-weight: bold;
+            color: #4b5563;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .prateleiras-container {
+            display: grid;
+            grid-template-rows: repeat(8, 1fr);
+            gap: 8px;
+        }
+        
+        .prateleira {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            min-width: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .prateleira:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prateleira.destacado {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+        }
+        
+        .prateleira-numero {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .prateleira-itens {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        
+        .expedicao {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .expedicao h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .expedicao h2 i {
+            margin-right: 10px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#3b82f6, #8b5cf6);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(#2563eb, #7c3aed);
+        }
+        
+        /* Floating action buttons */
+        .fab {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .fab:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Item list animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .item-list li {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        .item-list li:nth-child(1) { animation-delay: 0.1s; }
+        .item-list li:nth-child(2) { animation-delay: 0.2s; }
+        .item-list li:nth-child(3) { animation-delay: 0.3s; }
+        .item-list li:nth-child(4) { animation-delay: 0.4s; }
+        .item-list li:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* Location info */
+        .location-info {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
 </head>
-<body>
-    <main class="container">
-        <h1>Buscar Itens</h1>
-        <a href="../index.html" class="btn-back">Voltar</a>
-
-        <label for="search">Pesquisar por nome ou referência:</label>
-        <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="Ex.: Parafuso M5"
-            autocomplete="off"
-        />
-
-        <ul class="results" id="results"></ul>
-
-        <div id="location-display" style="margin-top: 20px; font-weight: bold;"></div>
+<body class="overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed -left-20 -top-20 w-64 h-64 rounded-full bg-blue-100 opacity-40"></div>
+    <div class="fixed -right-20 -bottom-20 w-96 h-96 rounded-full bg-purple-100 opacity-40"></div>
+    
+    <!-- Main content -->
+    <main class="min-h-screen flex items-start justify-center p-4 md:p-8 relative z-10 pt-20">
+        <div class="main-card rounded-2xl p-6 md:p-8 w-full max-w-6xl relative overflow-hidden mb-10">
+            <!-- Decorative elements -->
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-blue-100 opacity-20"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-purple-100 opacity-20"></div>
+            
+            <!-- Back button -->
+            <a href="../index.html" class="btn-back flex items-center text-blue-600 mb-6 w-max">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar
+            </a>
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold gradient-text">Busca 2D de Itens</h1>
+                    <p class="text-gray-500">Visualize a localização dos itens no estoque</p>
+                </div>
+                <div class="floating hidden md:block">
+                    <div class="bg-white p-4 rounded-2xl shadow-lg">
+                        <i class="fas fa-map-marked-alt text-4xl gradient-text"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search section -->
+            <div class="relative mb-6">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input type="text" id="search" 
+                       class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500" 
+                       placeholder="Digite nome, referência ou localização...">
+            </div>
+            
+            <!-- Results and location info -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Results list -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white bg-opacity-70 rounded-lg p-4 h-96 overflow-y-auto">
+                        <ul id="results" class="item-list space-y-2">
+                            <li class="text-gray-500 text-center py-4">Digite para buscar itens</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Location info -->
+                    <div id="location-display" class="location-info hidden">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <h3 class="font-bold text-gray-700">Localização do Item</h3>
+                        </div>
+                        <div id="location-details" class="text-sm text-gray-600"></div>
+                    </div>
+                </div>
+                
+                <!-- Estoque 2D -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white bg-opacity-70 rounded-xl p-4">
+                        <h2 class="text-xl font-bold text-gray-700 mb-4 flex items-center">
+                            <i class="fas fa-warehouse text-blue-500 mr-2"></i>
+                            Planta do Estoque
+                        </h2>
+                        
+                        <div class="estoque-container" id="estoque"></div>
+                        
+                        <div class="expedicao">
+                            <h2>
+                                <i class="fas fa-shipping-fast"></i>
+                                Área de Expedição
+                            </h2>
+                            <p class="text-sm text-gray-600 text-center">Itens prontos para envio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <!-- <h2>Planta do Estoque</h2> -->
-     <section class="planta2d">
-         <div class="estoque" id="estoque"></div>
-         <div class="expedicao">
-            <h2>Expedição</h2>
-         </div>
-     </section>
-    <script src="../script/busca.js"></script>
+    
+    <!-- Floating action buttons -->
+    <a href="ajuda.html" class="fab fixed bottom-6 right-6 md:right-auto md:left-6 bg-blue-500 text-white p-4 rounded-full shadow-lg z-20">
+        <i class="fas fa-question text-xl"></i>
+    </a>
+    
+    <a href="cadastrarUsuario.html" class="fab fixed bottom-6 right-24 md:right-auto md:left-24 bg-purple-500 text-white p-4 rounded-full shadow-lg z-20">
+        <i class="fas fa-user-plus text-xl"></i>
+    </a>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-boxes text-xl text-blue-400 mr-2"></i>
+                    <span class="text-lg font-bold">Estoque 2D</span>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm">© 2023 Estoque 2D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Busca de itens
+        const searchInput = document.getElementById('search');
+        const resultsList = document.getElementById('results');
+        const locationDisplay = document.getElementById('location-display');
+        const locationDetails = document.getElementById('location-details');
+        
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.trim();
+            
+            if (term.length === 0) {
+                resultsList.innerHTML = '<li class="text-gray-500 text-center py-4">Digite para buscar itens</li>';
+                locationDisplay.classList.add('hidden');
+                return;
+            }
+            
+            // Show loading state
+            resultsList.innerHTML = '<li class="text-center py-4"><i class="fas fa-spinner fa-spin text-blue-500"></i></li>';
+            
+            fetch(`../includes/buscar_ajax.php?term=${encodeURIComponent(term)}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsList.innerHTML = '';
+                    
+                    if (data.error) {
+                        resultsList.innerHTML = `<li class="text-red-500 text-center py-4">Erro: ${data.error}</li>`;
+                        return;
+                    }
+                    
+                    if (data.length === 0) {
+                        resultsList.innerHTML = '<li class="text-gray-500 text-center py-4">Nenhum item encontrado</li>';
+                        return;
+                    }
+                    
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'bg-white bg-opacity-70 rounded-lg p-3 flex justify-between items-center';
+                        li.innerHTML = `
+                            <div>
+                                <div class="font-bold text-blue-600">${item.nome}</div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Ref:</span> ${item.referencia} | 
+                                    <span class="font-medium">Local:</span> ${item.localizacao}
+                                </div>
+                            </div>
+                            <button onclick="localizarItem('${item.localizacao}', '${item.nome}', '${item.referencia}')" 
+                                    class="btn-primary text-white text-sm py-1 px-3 rounded-full">
+                                <i class="fas fa-map-marker-alt mr-1"></i> Localizar
+                            </button>
+                        `;
+                        resultsList.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    resultsList.innerHTML = '<li class="text-red-500 text-center py-4">Erro na busca</li>';
+                    console.error(err);
+                });
+        });
+        
+        // Gerar estoque 2D
+        const estoque = document.getElementById("estoque");
+        
+        // Criar 4 corredores com prateleiras entre eles
+        for (let c = 1; c <= 4; c++) {
+            // Adicionar corredor
+            const corredor = document.createElement("div");
+            corredor.className = "corredor";
+            corredor.innerHTML = `<div class="text-lg font-bold text-blue-600">Corredor ${c}</div>`;
+            estoque.appendChild(corredor);
+            
+            // Adicionar prateleiras (exceto após o último corredor)
+            if (c < 4) {
+                const prateleirasContainer = document.createElement("div");
+                prateleirasContainer.className = "prateleiras-container";
+                
+                // Criar 8 prateleiras verticais
+                for (let p = 1; p <= 8; p++) {
+                    const prateleira = document.createElement("div");
+                    prateleira.className = "prateleira";
+                    const id = `C${c}P${p}`;
+                    prateleira.id = id;
+                    
+                    const prateleiraNumero = document.createElement("div");
+                    prateleiraNumero.className = "prateleira-numero";
+                    prateleiraNumero.textContent = `P${p}`;
+                    
+                    const prateleiraItens = document.createElement("div");
+                    prateleiraItens.className = "prateleira-itens";
+                    prateleiraItens.textContent = "0 itens";
+                    
+                    prateleira.appendChild(prateleiraNumero);
+                    prateleira.appendChild(prateleiraItens);
+                    prateleirasContainer.appendChild(prateleira);
+                }
+                
+                estoque.appendChild(prateleirasContainer);
+            }
+        }
+        
+        // Função para localizar item no estoque 2D
+        function localizarItem(localizacao, nome, referencia) {
+            // Mostrar informações da localização
+            locationDisplay.classList.remove('hidden');
+            locationDetails.innerHTML = `
+                <div class="mb-1"><span class="font-medium">Item:</span> ${nome}</div>
+                <div class="mb-1"><span class="font-medium">Referência:</span> ${referencia}</div>
+                <div><span class="font-medium">Localização:</span> ${localizacao}</div>
+            `;
+            
+            // Destacar prateleira
+            const local = localizacao.match(/^C\d+P\d+/)?.[0];
+            document.querySelectorAll('.prateleira').forEach(p => {
+                p.classList.remove('destacado');
+                p.style.zIndex = '0';
+            });
+            
+            const alvo = document.getElementById(local.toUpperCase());
+            if (alvo) {
+                alvo.classList.add('destacado');
+                alvo.style.zIndex = '10';
+                
+                // Scroll suave para a prateleira
+                alvo.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'center'
+                });
+                
+                // Adicionar animação de pulso
+                alvo.style.animation = 'pulse 1.5s infinite';
+                
+                // Carregar itens da prateleira (simulação)
+                setTimeout(() => {
+                    const itensCount = Math.floor(Math.random() * 5) + 1;
+                    const itensElement = alvo.querySelector('.prateleira-itens');
+                    itensElement.textContent = `${itensCount} ${itensCount === 1 ? 'item' : 'itens'}`;
+                }, 500);
+            } else {
+                alert('Localização não encontrada no estoque.');
+            }
+        }
+        
+        // Adicionar estilo de animação de pulso
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+                70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+                100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
