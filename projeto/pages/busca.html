@@ -6,231 +6,9 @@
     <title>Busca 2D - Gerenciamento de Estoque 2D</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/buscaest.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .main-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        .input-field {
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-        }
-        
-        .input-field:focus {
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(90deg, #6b7280, #9ca3af);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(107, 114, 128, 0.6);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(90deg, #ef4444, #f87171);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.6);
-        }
-        
-        .btn-back {
-            transition: all 0.3s ease;
-        }
-        
-        .btn-back:hover {
-            transform: translateX(-3px);
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        /* Estoque 2D styles */
-        .estoque-container {
-            display: grid;
-            grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 1fr;
-            gap: 10px;
-            margin-top: 30px;
-        }
-        
-        .corredor {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            font-weight: bold;
-            color: #4b5563;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .prateleiras-container {
-            display: grid;
-            grid-template-rows: repeat(8, 1fr);
-            gap: 8px;
-        }
-        
-        .prateleira {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 6px;
-            padding: 8px;
-            font-size: 0.8rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            min-width: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .prateleira:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .prateleira.destacado {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transform: scale(1.05);
-        }
-        
-        .prateleira-numero {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .prateleira-itens {
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
-        
-        .expedicao {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .expedicao h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #3b82f6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .expedicao h2 i {
-            margin-right: 10px;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(#3b82f6, #8b5cf6);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(#2563eb, #7c3aed);
-        }
-        
-        /* Floating action buttons */
-        .fab {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .fab:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* Item list animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .item-list li {
-            animation: fadeIn 0.3s ease forwards;
-        }
-        
-        .item-list li:nth-child(1) { animation-delay: 0.1s; }
-        .item-list li:nth-child(2) { animation-delay: 0.2s; }
-        .item-list li:nth-child(3) { animation-delay: 0.3s; }
-        .item-list li:nth-child(4) { animation-delay: 0.4s; }
-        .item-list li:nth-child(5) { animation-delay: 0.5s; }
-        
-        /* Location info */
-        .location-info {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #3b82f6;
-        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -274,7 +52,7 @@
             </div>
             
             <!-- Results and location info -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="resultLocation">
                 <!-- Results list -->
                 <div class="lg:col-span-1">
                     <div class="bg-white bg-opacity-70 rounded-lg p-4 h-96 overflow-y-auto">
@@ -294,30 +72,22 @@
                 </div>
                 
                 <!-- Estoque 2D -->
-                <div class="lg:col-span-2">
-                    <div class="bg-white bg-opacity-70 rounded-xl p-4">
-                        <h2 class="text-xl font-bold text-gray-700 mb-4 flex items-center">
-                            <i class="fas fa-warehouse text-blue-500 mr-2"></i>
-                            Planta do Estoque
-                        </h2>
-                        
-                        <div class="estoque-container" id="estoque"></div>
-                        
+                <article class="estoqueInteiro">
+                    <section class="planta2d">
+                        <div class="estoque" id="estoque"></div>
                         <div class="expedicao">
-                            <h2>
-                                <i class="fas fa-shipping-fast"></i>
-                                Área de Expedição
-                            </h2>
-                            <p class="text-sm text-gray-600 text-center">Itens prontos para envio</p>
+                           <h2>Expedição</h2>
                         </div>
-                    </div>
-                </div>
+                    </section>
+
+                </article>
+               <script src="../script/busca.js"></script>
             </div>
         </div>
     </main>
     
     <!-- Floating action buttons -->
-    <a href="ajuda.html" class="fab fixed bottom-6 right-6 md:right-auto md:left-6 bg-blue-500 text-white p-4 rounded-full shadow-lg z-20">
+    <a href="ajudaFuncionario.html" class="fab fixed bottom-6 right-6 md:right-auto md:left-6 bg-blue-500 text-white p-4 rounded-full shadow-lg z-20">
         <i class="fas fa-question text-xl"></i>
     </a>
     

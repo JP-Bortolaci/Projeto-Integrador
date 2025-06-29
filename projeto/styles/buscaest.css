@@ -1,176 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(90deg, #74ebd5, #acb6e5);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
 }
 
-.container {
-    background: #ffffff;
-    padding: 30px 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    width: 360px;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease;
+.gradient-text {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-.container:hover {
-    transform: scale(1.02);
+.main-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #333333;
-    font-size: 26px;
-    font-weight: 600;
-}
-
-label {
-    display: block;
-    margin-top: 12px;
-    color: #555555;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: left;
-}
-
-input {
-    width: 90%;
-    padding: 12px;
-    margin-top: 6px;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-    font-size: 14px;
+.input-field {
     transition: all 0.3s ease;
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-input:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+.input-field:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
-button {
-    margin-top: 20px;
-    padding: 14px;
-    width: 100%;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
+.btn-primary {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
 }
 
-button:hover {
-    background: linear-gradient(135deg, #0056b3, #00408a);
-    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
 }
 
-button:active {
-    transform: scale(0.98);
+.btn-secondary {
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
+    transition: all 0.3s ease;
 }
 
-.results {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 25px;
-    text-align: left;
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(107, 114, 128, 0.6);
 }
 
-.results li {
-    background: linear-gradient(135deg, #f4f4f9, #e8e8f3);
-    padding: 12px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    font-size: 15px;
-    color: #444;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+.btn-danger {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+    transition: all 0.3s ease;
 }
 
-.results li:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.6);
 }
 
-/* Estilo do Botão Voltar no canto superior esquerdo */
 .btn-back {
-    display: inline-block;
-    position: absolute; /* Para posicionar no canto superior esquerdo */
-    top: 30px;
-    left: 40px;
-    padding: 8px 12px;
-    background: linear-gradient(135deg, #6c757d, #5a6268); /* Caixa cinza */
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 8px;
-    transition: 0.3s ease;
-    border: none;
+    transition: all 0.3s ease;
 }
 
 .btn-back:hover {
-    background: linear-gradient(135deg, #5a6268, #494f54); /* Efeito hover */
-    transform: scale(1.02);
+    transform: translateX(-3px);
 }
 
-.btn-back:active {
-    background: linear-gradient(135deg, #494f54, #434a4f); /* Efeito de click */
-    transform: scale(0.96);
+.floating {
+    animation: floating 3s ease-in-out infinite;
 }
 
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#3b82f6, #8b5cf6);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#2563eb, #7c3aed);
+}
+
+/* Floating action buttons */
+.fab {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.fab:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Item list animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.item-list li {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.item-list li:nth-child(1) { animation-delay: 0.1s; }
+.item-list li:nth-child(2) { animation-delay: 0.2s; }
+.item-list li:nth-child(3) { animation-delay: 0.3s; }
+.item-list li:nth-child(4) { animation-delay: 0.4s; }
+.item-list li:nth-child(5) { animation-delay: 0.5s; }
+
+/* Location info */
+.location-info {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #3b82f6;
+}
+
+/* Result and location */
+.resultLocation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
 
 /* Planta 2D */
+.estoqueInteiro {
+    grid-column: 2/4;
+    grid-row: 1/3;
+    width: 100%;
+    height: 80%;
+}
+
+#location-display {
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+
 .planta2d {
+    padding: 2%;
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
     transition: all 0.5s ease-in;
     background-color: #ffffff67;
     box-shadow: 0 0px 20px rgba(0, 0, 0, 0.384);
-    width: 80vh;
-    height: 45vw;
+    width: 100%;
+    height: 100%;
+    /* width: 70vh;
+    height: 40vw; */
     border-radius: 16px;
-    transform: rotate(-90deg);
+    /* transform: rotate(-90deg); */
+    margin: auto;
 }
 
 /* Área de expedição dentro da planta */
 .expedicao {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     background: radial-gradient(rgba(139, 139, 139, 0.411), rgba(128, 128, 128, 0.349));
-    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.411); */
     border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    grid-column: 9/11;
+    border-top-left-radius: 10px;
+    grid-row: 1/3;
     display: flex;
-    /* background: #33333349; */
-    margin: 10%;
     justify-content: center;
     justify-items: center;
     align-items: center;
 }
 
 /* Texto dentro da área de expedição */
-.expedicao > h2 {
-    transform:rotate(90deg);
+.expedicao h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Todos os corredores */
 .estoque {
     margin: auto;
     display: grid;
-    grid-column: 2/9;
-    grid-template-columns: repeat(5, 1fr);
+    grid-auto-flow: column;
+    grid-row: 3/11;
+    grid-template-rows: repeat(5, 1fr);
     transition: all 0.5s ease-in;
     width: 100%;
     height: 96.5%;
@@ -180,33 +209,40 @@ button:active {
 /* Texto dentro de cada prateleira */
 .prateleiraSpan {
     display: inline-block;
-    transform: rotate(90deg);
+    /* transform: rotate(90deg); */
 }
 
 /* Cada prateleira */
 .prateleira {
-    margin: 2px 0;
+    margin: 1px 0;
     background: radial-gradient(rgba(128, 128, 128, 0.041), rgba(119, 119, 119, 0.473));
     background-color: rgb(255, 238, 191);
-    /* border: 1px solid #88888881; */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 11px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.411);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.prateleira:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Texto dentro de cada corredor */
 .corredorSpan {
     display: inline-block;
-    transform: rotate(90deg);
+    /* transform: rotate(90deg); */
 }
 
 /* Cada corredor */
 .corredor {
-    margin: auto 0;
-    height: 20px;
+    margin: 0 auto;
+    width: 25px;
     background-color: #7c7c7c86;
     border: 2px solid #7c7c7c00;
     color: white;
@@ -218,25 +254,24 @@ button:active {
 
 /* Prateleira a ser destacada ao rodar a função */
 .destacado {
-    transition: all 0.7s ease;
-    background: radial-gradient(#2f93ff,#000000ad) !important;
-    transform: scale(1.1);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.411);
-    /* background-color: #3bd140 !important; */
-    /* border: 1px solid #3bd140; */
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
     color: white;
+    transform: scale(1.05);
+    transition: all 0.7s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.411);
     font-weight: bold;
 }
 
 @media (max-width: 700px) {
-    body {
-        flex-direction: column;
+    .estoqueInteiro {
+        grid-column: 1/4;
+        grid-row: 2/3;
+        width: 80%;
+        height: 110%;
+        margin: auto;
     }
-    .planta2d {
-    width: 40vh;
-    height: 90vw;
-    }
-    .container {
-        width: 75%;
+    #location-display {
+        grid-column: 3/4;
+        grid-row: 1/2;
     }
 }

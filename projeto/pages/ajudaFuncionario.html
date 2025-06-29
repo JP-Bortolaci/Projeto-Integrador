@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda - Como Cadastrar Itens | Estoque 2D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .step-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+        }
+        
+        .location-example {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 8px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed -left-20 -top-20 w-64 h-64 rounded-full bg-blue-100 opacity-40"></div>
+    <div class="fixed -right-20 -bottom-20 w-96 h-96 rounded-full bg-purple-100 opacity-40"></div>
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="flex items-center">
+                <i class="fas fa-boxes text-2xl gradient-text mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">Estoque 2D</span>
+            </a>
+            <div>
+                <a href="busca.html" class="text-gray-600 hover:text-blue-600 transition-colors mr-4">
+                    <i class="fas fa-arrow-left mr-1"></i> Voltar à Busca
+                </a>
+                <a href="../index.html" class="text-gray-600 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-home mr-1"></i> Página Inicial
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Header with gradient -->
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 md:p-8 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold mb-2">Central de Ajuda</h1>
+                        <p class="opacity-90">Guia completo para cadastrar itens no sistema</p>
+                    </div>
+                    <div class="hidden md:block floating">
+                        <i class="fas fa-question-circle text-5xl opacity-80"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-6 md:p-8">
+                <div class="mb-10">
+                    <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                        Introdução
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        Este guia detalhado vai ajudar você a cadastrar seus itens corretamente no sistema Estoque 2D, 
+                        garantindo que seu estoque físico e digital estejam sempre sincronizados e organizados.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                        <p class="text-blue-800 font-medium">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                            Dica: Um cadastro bem feito economiza tempo na busca e evita perda de itens!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mb-10">
+                    <h2 class="text-xl md:text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                        <i class="fas fa-edit text-purple-500 mr-2"></i>
+                        Campos do Formulário
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="step-card bg-white p-6 rounded-lg shadow-md border">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-tag text-blue-600"></i>
+                                </div>
+                                <h3 class="font-bold text-lg text-gray-800">Nome do Item</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Insira um nome descritivo e claro. Exemplos:
+                                <span class="block mt-2 px-3 py-2 bg-gray-100 rounded">
+                                    <em>"Parafuso sextavado M5x20"</em>, <em>"Chave de fenda Philips #2"</em>
+                                </span>
+                            </p>
+                        </div>
+                        
+                        <div class="step-card bg-white p-6 rounded-lg shadow-md border">
+                            <div class="flex items-center mb-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-barcode text-purple-600"></i>
+                                </div>
+                                <h3 class="font-bold text-lg text-gray-800">Referência</h3>
+                            </div>
+                            <p class="text-gray-600">
+                                Código único do item. Pode ser do fabricante ou interno:
+                                <span class="block mt-2 px-3 py-2 bg-gray-100 rounded">
+                                    <em>"REF1234"</em>, <em>"ABC-009"</em>, <em>"PFS-M5-20"</em>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                            Localização no Estoque
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            O sistema usa um padrão de codificação para identificar exatamente onde cada item está armazenado.
+                            A localização é composta por três partes:
+                        </p>
+                        
+                        <div class="location-example p-6 mb-6">
+                            <div class="text-center mb-4">
+                                <div class="inline-block bg-white px-6 py-3 rounded-full shadow">
+                                    <span class="text-2xl font-bold text-gray-800">C2P3A1</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow">
+                                        <span class="font-bold text-blue-600">C2</span>
+                                    </div>
+                                    <p class="font-medium">Corredor 2</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow">
+                                        <span class="font-bold text-purple-600">P3</span>
+                                    </div>
+                                    <p class="font-medium">Prateleira 3</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2 shadow">
+                                        <span class="font-bold text-indigo-600">A1</span>
+                                    </div>
+                                    <p class="font-medium">Altura 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                            <strong>Importante:</strong> Mantenha a mesma codificação no estoque físico, colocando etiquetas 
+                            visíveis em cada corredor, prateleira e altura.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mb-10">
+                    <h2 class="text-xl md:text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                        <i class="fas fa-tags text-green-500 mr-2"></i>
+                        Etiquetas para o Estoque Físico
+                    </h2>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden border">
+                        <div class="md:flex">
+                            <div class="md:w-1/3 bg-green-50 p-6 flex items-center justify-center">
+                                <i class="fas fa-tag text-6xl text-green-500"></i>
+                            </div>
+                            <div class="md:w-2/3 p-6">
+                                <h3 class="font-bold text-lg text-gray-800 mb-3">Padronização é Fundamental</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Para garantir que seu estoque físico corresponda exatamente ao digital, recomendamos:
+                                </p>
+                                <ul class="list-disc pl-5 text-gray-600 space-y-2 mb-6">
+                                    <li>Imprimir etiquetas com os códigos de localização</li>
+                                    <li>Colar nos locais correspondentes no estoque</li>
+                                    <li>Usar cores diferentes para cada tipo de área (corredor, prateleira, altura)</li>
+                                    <li>Manter as etiquetas sempre visíveis e legíveis</li>
+                                </ul>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <a href="../downloads/etiquetas_modelo.pdf" 
+                                       class="flex-1 bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-medium py-3 px-6 rounded-lg text-center transition-all shadow hover:shadow-lg pulse"
+                                       download>
+                                        <i class="fas fa-file-pdf mr-2"></i> Baixar Modelo (PDF)
+                                    </a>
+                                    <a href="../downloads/etiquetas_modelo.xlsx" 
+                                       class="flex-1 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-medium py-3 px-6 rounded-lg text-center transition-all shadow hover:shadow-lg"
+                                       download>
+                                        <i class="fas fa-file-excel mr-2"></i> Baixar Modelo (Excel)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+                    <h3 class="font-bold text-lg text-indigo-800 mb-3 flex items-center">
+                        <i class="fas fa-video mr-2"></i> Tutorial em Vídeo
+                    </h3>
+                    <p class="text-indigo-700 mb-4">
+                        Assista ao nosso tutorial completo para ver na prática como cadastrar itens e organizar seu estoque:
+                    </p>
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-indigo-400 to-purple-500">
+                            <i class="fas fa-play-circle text-white text-5xl"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-indigo-600 mt-2">
+                        <i class="fas fa-clock mr-1"></i> Duração: 4min 32seg
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="container mx-auto px-4 py-12 max-w-4xl">
+        <h2 class="text-2xl font-bold mb-8 text-center text-gray-800">
+            <i class="fas fa-question-circle gradient-text mr-2"></i>
+            Perguntas Frequentes
+        </h2>
+        
+        <div class="space-y-4">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border">
+                <button class="w-full text-left p-4 focus:outline-none flex justify-between items-center">
+                    <span class="font-medium text-gray-800">Posso alterar o padrão de codificação de localização?</span>
+                    <i class="fas fa-chevron-down text-blue-500 transition-transform"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-gray-600">
+                        Sim, o padrão C2P3A1 é apenas uma sugestão. Você pode configurar seu próprio padrão nas configurações do sistema, 
+                        mas recomendamos manter alguma lógica clara de organização.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border">
+                <button class="w-full text-left p-4 focus:outline-none flex justify-between items-center">
+                    <span class="font-medium text-gray-800">E se eu cometer um erro ao cadastrar um item?</span>
+                    <i class="fas fa-chevron-down text-blue-500 transition-transform"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-gray-600">
+                        Todos os itens podem ser editados posteriormente. Basta localizar o item na lista de estoque, clicar no ícone de edição 
+                        e fazer as alterações necessárias. O sistema mantém um histórico de todas as modificações.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border">
+                <button class="w-full text-left p-4 focus:outline-none flex justify-between items-center">
+                    <span class="font-medium text-gray-800">Como lidar com itens que ocupam múltiplas localizações?</span>
+                    <i class="fas fa-chevron-down text-blue-500 transition-transform"></i>
+                </button>
+                <div class="px-4 pb-4 hidden">
+                    <p class="text-gray-600">
+                        Para itens grandes ou com múltiplos lotes, você pode:
+                    </p>
+                    <ul class="list-disc pl-5 mt-2 text-gray-600 space-y-1">
+                        <li>Cadastrar como itens separados com localizações diferentes</li>
+                        <li>Usar a função "Lotes" do sistema para gerenciar múltiplas entradas do mesmo item</li>
+                        <li>Incluir observações no campo de descrição do item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <div class="text-center py-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Ainda com dúvidas?</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+            Nossa equipe de suporte está pronta para ajudar você a configurar seu estoque da melhor forma possível.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="mailto:suporte@estoque2d.com.br" 
+               class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium shadow hover:shadow-lg transition-all hover:scale-105">
+                <i class="fas fa-envelope mr-2"></i> Enviar E-mail
+            </a>
+            <a href="tel:+5511999999999" 
+               class="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium shadow hover:shadow-lg transition-all hover:scale-105">
+                <i class="fas fa-phone mr-2"></i> Ligar para Suporte
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-boxes text-2xl text-blue-400 mr-2"></i>
+                        <span class="text-xl font-bold">Estoque 2D</span>
+                    </div>
+                    <p class="text-gray-400 mt-1">Solução completa para gestão de estoque</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-colors">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-purple-600 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400">
+                <p>© 2023 Estoque 2D. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ accordion functionality
+        document.querySelectorAll('.bg-white button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
