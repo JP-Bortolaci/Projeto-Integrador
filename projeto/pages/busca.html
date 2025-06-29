@@ -53,14 +53,14 @@
                     </div>
                     <div id="location-details" class="location-details"></div>
                 </div>
+                <article class="estoqueInteiro">
+                    <section class="planta2d">
+                        <div class="estoque" id="estoque"></div>
+                        <div class="expedicao"><h2>Expedição</h2></div>
+                    </section>
+                </article>
             </div>
 
-            <article class="estoqueInteiro">
-                <section class="planta2d">
-                    <div class="estoque" id="estoque"></div>
-                    <div class="expedicao"><h2>Expedição</h2></div>
-                </section>
-            </article>
         </div>
     </main>
 
@@ -79,7 +79,6 @@
     </footer>
 
     <script>
-        // Seu JavaScript continua aqui, sem mudanças
         const searchInput = document.getElementById('search');
         const resultsList = document.getElementById('results');
         const locationDisplay = document.getElementById('location-display');
@@ -153,7 +152,7 @@
                         corredor.className = "corredor";
                         corredorSpan.className = "corredorSpan";
                         if (i == 1 || i == 3) {
-                            corredorSpan.textContent = `C${corredorAtual}`
+                            corredorSpan.textContent = `­CORREDORㅤ­­­${corredorAtual}`;
                         } else {
                             corredorSpan.textContent = "";
                         }
