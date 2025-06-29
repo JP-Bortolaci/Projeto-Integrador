@@ -70,7 +70,7 @@ for (let bloco = 0; bloco < 4; bloco++) {
         for (let p = 1; p <= 5; p++) {
             const prateleira = document.createElement("div");
             const prateleiraSpan = document.createElement("span");
-            const prateleiraNum = (linha * 5 + p); // P1 a P8 por corredor
+            const prateleiraNum = (linha * 5 + p); // P1 a P5 por corredor
             const id = `C${corredorAtual}P${prateleiraNum}`;
 
 
