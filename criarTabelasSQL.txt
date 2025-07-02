@@ -20,3 +20,80 @@ INSERIR USUÁRIOS PADRÃO
 
 INSERT INTO usuarios (login, senha, tipo) VALUES ("gestor1", "4321", "gestor");
 INSERT INTO usuarios (login, senha, tipo) VALUES ("funcionario1", "4321", "funcionario");
+
+
+INSERT INTO `item` (nome, referencia, localizacao) VALUES
+
+-- C3P5
+('Chave Estrela 12mm', '60/001', 'C3P5A1'),
+('Arruela de Pressão M10', '30/001', 'C3P5A2'),
+('Espaçador de Alumínio', '40/001', 'C3P5A3'),
+
+-- C4P1
+('Parafuso Inox M8', '10/001', 'C4P1A1'),
+('Abraçadeira Reforçada', '70/001', 'C4P1A2'),
+('Pino Expansível', '80/001', 'C4P1A3'),
+('Bucha Universal', '50/001', 'C4P1A1'),
+('Arruela Borracha M6', '30/002', 'C4P1A2'),
+
+-- C4P2
+('Parafuso Cabeça Chata', '10/002', 'C4P2A1'),
+('Porca Travante Inox', '20/001', 'C4P2A2'),
+('Espaçador PVC', '40/002', 'C4P2A3'),
+('Anilha de Vedação', '30/003', 'C4P2A1'),
+('Pino Inox Rosqueado', '80/002', 'C4P2A2'),
+
+-- C4P3
+('Abraçadeira Nylon Média', '70/002', 'C4P3A1'),
+('Bucha de Nylon M10', '50/002', 'C4P3A2'),
+('Arruela Dentada', '30/004', 'C4P3A3'),
+('Chave Allen 6mm', '60/002', 'C4P3A1'),
+('Parafuso Auto Atarraxante', '10/003', 'C4P3A2'),
+
+-- C4P4
+('Grampo de Aço', '80/003', 'C4P4A1'),
+('Anel de Encaixe', '80/004', 'C4P4A2'),
+('Bucha Plástica P6', '50/003', 'C4P4A3'),
+('Espaçador de Aço', '40/003', 'C4P4A1'),
+('Parafuso Longo M6', '10/004', 'C4P4A2'),
+
+-- C4P5
+('Arruela de Borracha M10', '30/005', 'C4P5A1'),
+('Parafuso sem Cabeça', '10/005', 'C4P5A2'),
+('Chumbador Químico', '90/001', 'C4P5A3'),
+('Bucha de Expansão', '50/004', 'C4P5A1'),
+('Parafuso Fenda Plana', '10/006', 'C4P5A2'),
+
+-- C2P1
+('Porca Sextavada Inox', '20/002', 'C2P1A1'),
+('Parafuso Cabeça Redonda', '10/007', 'C2P1A2'),
+('Arruela Cônica Inox', '30/006', 'C2P1A3'),
+('Espaçador Curto Nylon', '40/004', 'C2P1A1'),
+('Grampo Tipo U Inox', '80/005', 'C2P1A2'),
+
+-- C2P2
+('Anel de Retenção Inox', '80/006', 'C2P2A1'),
+('Pino de Pressão', '80/007', 'C2P2A2'),
+('Porca Rosca Fina', '20/003', 'C2P2A3'),
+('Parafuso Flangeado Inox', '10/008', 'C2P2A1'),
+('Chave Allen 5mm', '60/003', 'C2P2A2'),
+
+-- C3P1
+('Arruela Mola M6', '30/007', 'C3P1A1'),
+('Porca Castanha', '20/004', 'C3P1A2'),
+('Espaçador Injetado', '40/005', 'C3P1A3'),
+('Parafuso Auto Brocante', '10/009', 'C3P1A1'),
+('Bucha Tipo S', '50/005', 'C3P1A2'),
+
+-- C3P2
+('Anel Guia', '80/008', 'C3P2A1'),
+('Chave Combinada 12mm', '60/004', 'C3P2A2'),
+('Pino Duplo', '80/009', 'C3P2A3'),
+('Arruela de Fixação', '30/008', 'C3P2A1'),
+('Parafuso Cabeça Tork', '10/010', 'C3P2A2'),
+
+-- C4P1 (extras)
+('Parafuso Cabeça Estrela', '10/011', 'C4P1A1'),
+('Porca Z', '20/005', 'C4P1A2'),
+('Chave Estrela 14mm', '60/005', 'C4P1A3'),
+('Arruela Grande Inox', '30/009', 'C4P1A2');
