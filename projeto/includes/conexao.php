@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$db   = 'estoque';
-$user = 'root';
-$pass = '';
+$host = 'sql104.infinityfree.com';
+$db   = 'if0_39324238_estoque';
+$user = 'if0_39324238';
+$pass = 'SilkTouch123321';
 $charset = 'utf8mb4';
 
 $options = [

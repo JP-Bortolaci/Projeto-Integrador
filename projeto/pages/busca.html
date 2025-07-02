@@ -1,36 +1,216 @@
+<!-- busca2d.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Buscar Itens</title>
-    <link rel="stylesheet" href="../styles/buscaest.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca 2D - Gerenciamento de Estoque 2D</title>
+    <link rel="stylesheet" href="../styles/buscaest.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <main class="container">
-        <h1>Buscar Itens</h1>
-        <a href="../index.html" class="btn-back">Voltar</a>
+<body class="body-custom">
+    <div class="bg-circle blue"></div>
+    <div class="bg-circle purple"></div>
 
-        <label for="search">Pesquisar por nome ou referência:</label>
-        <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="Ex.: Parafuso M5"
-            autocomplete="off"
-        />
+    <main class="main-container">
+        <div class="main-card">
+            <div class="decorative-circle top-right"></div>
+            <div class="decorative-circle bottom-left"></div>
 
-        <ul class="results" id="results"></ul>
+            <a href="../pages/login.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
 
-        <div id="location-display" style="margin-top: 20px; font-weight: bold;"></div>
+            <div class="header-container">
+                <div>
+                    <h1 class="titulo">Busca 2D de Itens</h1>
+                    <p class="subtitulo">Visualize a localização dos itens no estoque</p>
+                </div>
+                <div class="icon-box">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <input type="text" id="search" class="search-input" placeholder="Digite nome, referência ou localização...">
+            </div>
+
+            <div class="resultLocation">
+                <div class="result-box">
+                    <ul id="results" class="item-list">
+                        <li class="placeholder">Digite para buscar itens</li>
+                    </ul>
+                </div>
+
+                <div id="location-display" class="location-info hidden">
+                    <div class="location-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Localização do Item</h3>
+                    </div>
+                    <div id="location-details" class="location-details"></div>
+                </div>
+                <article class="estoqueInteiro">
+                    <section class="planta2d">
+                        <div class="estoque" id="estoque"></div>
+                        <div class="expedicao"><h2>Expedição</h2></div>
+                    </section>
+                </article>
+            </div>
+
+        </div>
     </main>
-    <!-- <h2>Planta do Estoque</h2> -->
-     <section class="planta2d">
-         <div class="estoque" id="estoque"></div>
-         <div class="expedicao">
-            <h2>Expedição</h2>
-         </div>
-     </section>
-    <script src="../script/busca.js"></script>
+
+    <a href="ajudaFuncionario.html" class="fab">
+        <i class="fas fa-question"></i>
+    </a>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-icon">
+                <i class="fas fa-boxes"></i>
+                <span>Estoque 2D</span>
+            </div>
+            <p>© 2025 Estoque 2D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const resultsList = document.getElementById('results');
+        const locationDisplay = document.getElementById('location-display');
+        const locationDetails = document.getElementById('location-details');
+        
+        searchInput.addEventListener('input', () => {
+            const term = searchInput.value.trim();
+            
+            if (term.length === 0) {
+                resultsList.innerHTML = '<li class="text-gray-500 text-center py-4">Digite para buscar itens</li>';
+                locationDisplay.classList.add('hidden');
+                return;
+            }
+            
+            // Show loading state
+            resultsList.innerHTML = '<li class="text-center py-4"><i class="fas fa-spinner fa-spin text-blue-500"></i></li>';
+            
+            fetch(`../includes/buscar_ajax.php?term=${encodeURIComponent(term)}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsList.innerHTML = '';
+                    
+                    if (data.error) {
+                        resultsList.innerHTML = `<li class="text-red-500 text-center py-4">Erro: ${data.error}</li>`;
+                        return;
+                    }
+                    
+                    if (data.length === 0) {
+                        resultsList.innerHTML = '<li class="text-gray-500 text-center py-4">Nenhum item encontrado</li>';
+                        return;
+                    }
+                    
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.className = 'bg-white bg-opacity-70 rounded-lg p-3 flex justify-between items-center';
+                        li.innerHTML = `
+                            <div>
+                                <div class="font-bold text-blue-600">${item.nome}</div>
+                                <div class="text-sm text-gray-600">
+                                    <span class="font-medium">Ref:</span> ${item.referencia} | 
+                                    <span class="font-medium">Local:</span> ${item.localizacao}
+                                </div>
+                            </div>
+                            <button onclick="localizarItem('${item.localizacao}', '${item.nome}', '${item.referencia}')" 
+                                    class="btn-primary text-white text-sm py-1 px-3 rounded-full">
+                                <i class="fas fa-map-marker-alt mr-1"></i> Localizar
+                            </button>
+                        `;
+                        resultsList.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    resultsList.innerHTML = '<li class="text-red-500 text-center py-4">Erro na busca</li>';
+                    console.error(err);
+                });
+        });
+
+        const estoque = document.getElementById("estoque");
+
+        // Gerar 4 corredores (C1 a C4)
+        let corredorAtual = 1;
+
+        for (let bloco = 0; bloco < 4; bloco++) {
+            // 2 linhas de prateleiras por corredor (C1 a C4)
+            for (let linha = 0; linha < 2; linha++) {
+                // Adiciona linha de corredor entre blocos (exceto após o último)
+                if (bloco < 4 && linha == 1) {
+                    for (let i = 0; i < 5; i++) {
+                        const corredor = document.createElement("div");
+                        const corredorSpan = document.createElement("span");
+                        corredor.className = "corredor";
+                        corredorSpan.className = "corredorSpan";
+                        if (i == 1 || i == 3) {
+                            corredorSpan.textContent = `­CORREDORㅤ­­­${corredorAtual}`;
+                        } else {
+                            corredorSpan.textContent = "";
+                        }
+                        estoque.appendChild(corredor);
+                        corredor.appendChild(corredorSpan);
+                    }
+                }
+                for (let p = 1; p <= 5; p++) {
+                    const prateleira = document.createElement("div");
+                    const prateleiraSpan = document.createElement("span");
+                    const prateleiraNum = (linha * 5 + p); // P1 a P5 por corredor
+                    const id = `C${corredorAtual}P${prateleiraNum}`;
+
+
+                    prateleira.className = "prateleira";
+                    prateleira.id = id;
+                    prateleiraSpan.className = "prateleiraSpan";
+                    prateleiraSpan.textContent = `P${prateleiraNum}`;
+
+                    estoque.appendChild(prateleira);
+                    prateleira.appendChild(prateleiraSpan);
+                }
+            }
+        corredorAtual++;
+}
+        
+        // Função para localizar item no estoque 2D
+        function localizarItem(localizacao, nome, referencia) {
+            // Mostrar informações da localização
+            locationDisplay.classList.remove('hidden');
+            locationDetails.innerHTML = `
+                <div class="mb-1"><span class="font-medium">Item:</span> ${nome}</div>
+                <div class="mb-1"><span class="font-medium">Referência:</span> ${referencia}</div>
+                <div><span class="font-medium">Localização:</span> ${localizacao}</div>
+            `;
+            
+            // Destacar prateleira
+            const local = localizacao.match(/^C\d+P\d+/)?.[0];
+            document.querySelectorAll('.prateleira').forEach(p => {
+                p.classList.remove('destacado');
+                p.style.zIndex = '0';
+            });
+            
+            const alvo = document.getElementById(local.toUpperCase());
+            if (alvo) {
+                alvo.classList.add('destacado');
+                alvo.style.zIndex = '10';
+                
+                // Carregar itens da prateleira (simulação)
+                setTimeout(() => {
+                    const itensCount = Math.floor(Math.random() * 5) + 1;
+                    const itensElement = alvo.querySelector('.prateleira-itens');
+                    itensElement.textContent = `${itensCount} ${itensCount === 1 ? 'item' : 'itens'}`;
+                }, 500);
+            } else {
+                alert('Localização não encontrada no estoque.');
+            }
+        }
+    </script>
 </body>
 </html>

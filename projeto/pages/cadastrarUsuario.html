@@ -3,30 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuário</title>
-    <link rel="stylesheet" href="../styles/cadastrarUsuario.css">
+    <title>Cadastrar Usuário - Gerenciamento de Estoque 2D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.6);
+        }
+        
+        .btn-back {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            transform: translateX(-3px);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .select-custom {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+    </style>
 </head>
-<body>
-    <main class="container">
-        <a href="../index.html" class="btn-back">Voltar</a>
-        <h2 class="login">Cadastrar</h2>
-        <section class="usernameSection">            
-            <label for="username">Usuário:</label>
-            <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
-        </section>
-        <section class="passwordSection">
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-        </section>
-        <section class="userTypeSection">
-            <label for="tipoUsuario">Selecione o cargo:</label>
-            <select id="tipoUsuario" name="tipoUsuario" required> 
-                <option value="gestor">Gestor</option>
-                <option value="funcionario" selected>Funcionário</option>
-            </select>
-        </section>
-        <button type="submit" onclick="cadastrarUsuario()">Cadastrar</button>
+<body class="overflow-x-hidden">
+    <!-- Floating background elements -->
+    <div class="fixed -left-20 -top-20 w-64 h-64 rounded-full bg-blue-100 opacity-40"></div>
+    <div class="fixed -right-20 -bottom-20 w-96 h-96 rounded-full bg-purple-100 opacity-40"></div>
+    
+    <!-- Main content -->
+    <main class="min-h-screen flex items-center justify-center p-4 relative z-10">
+        <div class="card rounded-2xl p-8 md:p-12 w-full max-w-md relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-blue-100 opacity-20"></div>
+            <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-purple-100 opacity-20"></div>
+            
+            <!-- Back button -->
+            <a href="../pages/cadastro.html" class="btn-back flex items-center text-blue-600 mb-6 w-max">
+                <i class="fas fa-arrow-left mr-2"></i> Voltar
+            </a>
+            
+            <!-- Logo -->
+            <div class="flex justify-center mb-8">
+                <div class="floating">
+                    <div class="bg-white p-5 rounded-2xl shadow-lg">
+                        <i class="fas fa-user-plus text-5xl gradient-text"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cadastro form -->
+            <form id="cadastro-form" class="space-y-6">
+                <h2 class="text-3xl font-bold text-center gradient-text mb-2">Cadastrar Usuário</h2>
+                <p class="text-center text-gray-500 mb-8">Preencha os dados para criar um novo usuário</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Usuário</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="username" name="username"
+                                   class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                                   placeholder="Digite o nome de usuário" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password"
+                                   class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                                   placeholder="Digite uma senha segura" required>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500">Mínimo 8 caracteres com letras e números</p>
+                    </div>
+                    
+                    <div>
+                        <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Senha</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="confirm-password" name="confirm-password"
+                                   class="input-field pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                                   placeholder="Confirme a senha" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="tipoUsuario" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Usuário</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user-tag text-gray-400"></i>
+                            </div>
+                            <select id="tipoUsuario" name="tipoUsuario"
+                                    class="input-field select-custom pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 appearance-none"
+                                    required>
+                                <option value="gestor">Gestor</option>
+                                <option value="funcionario" selected>Funcionário</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center">
+                    <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="terms" class="ml-2 block text-sm text-gray-700">
+                        Confirmo que este usuário está autorizado a acessar o sistema
+                    </label>
+                </div>
+                
+                <button type="button" onclick="cadastrarUsuario()"
+                        class="btn-primary w-full py-3 px-4 rounded-lg text-white font-semibold shadow-md">
+                    <i class="fas fa-user-plus mr-2"></i> Cadastrar Usuário
+                </button>
+                
+                <p id="cadastro-message" class="text-center text-sm text-gray-500 mt-4"></p>
+            </form>
+        </div>
     </main>
-    <script src="../script/cadastrarUsuario.js"></script>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6 relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-boxes text-xl text-blue-400 mr-2"></i>
+                    <span class="text-lg font-bold">Estoque 2D</span>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm">© 2025 Estoque 2D. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function cadastrarUsuario() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const tipoUsuario = document.getElementById("tipoUsuario").value;
+            const termsChecked = document.getElementById("terms").checked;
+            
+            // Validações básicas
+            if (!termsChecked) {
+                showMessage("Você deve confirmar a autorização do usuário", "error");
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showMessage("As senhas não coincidem", "error");
+                return;
+            }
+            
+            if (password.length < 8) {
+                showMessage("A senha deve ter no mínimo 8 caracteres", "error");
+                return;
+            }
+            
+            // Show loading state
+            const btn = document.querySelector('button[type="button"]');
+            const originalBtnText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Cadastrando...';
+            btn.disabled = true;
+            
+            fetch("../includes/inserirUsuario.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    login: username, 
+                    senha: password, 
+                    tipoUsuario: tipoUsuario 
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro na resposta do servidor.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === "ok") {
+                    // Success animation
+                    btn.innerHTML = '<i class="fas fa-check mr-2"></i> Sucesso!';
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('bg-green-500');
+                    
+                    showMessage(data.mensagem, "success");
+                    
+                    // Clear form after success
+                    setTimeout(() => {
+                        document.getElementById("cadastro-form").reset();
+                        resetButton(btn, originalBtnText);
+                    }, 2000);
+                } else {
+                    // Error state
+                    btn.innerHTML = '<i class="fas fa-times mr-2"></i> Falha no cadastro';
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('bg-red-500');
+                    
+                    showMessage(data.mensagem || "Erro ao cadastrar usuário", "error");
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        resetButton(btn, originalBtnText);
+                    }, 3000);
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                
+                btn.innerHTML = '<i class="fas fa-times mr-2"></i> Erro de conexão';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('bg-red-500');
+                
+                showMessage("Erro na conexão com o servidor", "error");
+                
+                setTimeout(() => {
+                    resetButton(btn, originalBtnText);
+                }, 3000);
+            });
+        }
+        
+        function resetButton(btn, originalText) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('bg-green-500', 'bg-red-500');
+            btn.classList.add('btn-primary');
+        }
+        
+        function showMessage(message, type) {
+            const messageElement = document.getElementById('cadastro-message');
+            messageElement.textContent = message;
+            
+            // Remove all color classes first
+            messageElement.classList.remove('text-red-500', 'text-green-500', 'text-blue-500');
+            
+            // Add appropriate color class
+            if (type === "error") {
+                messageElement.classList.add('text-red-500');
+            } else if (type === "success") {
+                messageElement.classList.add('text-green-500');
+            } else {
+                messageElement.classList.add('text-blue-500');
+            }
+        }
+        
+        // Add enter key functionality to form
+        document.getElementById('cadastro-form').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                cadastrarUsuario();
+            }
+        });
+    </script>
 </body>
 </html>
