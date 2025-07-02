@@ -12,8 +12,6 @@ CREATE TABLE IF NOT EXISTS item (
 
 CRIAÇÃO DA TABELA "usuarios"
 
-use estoque;
-
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     login VARCHAR(50) NOT NULL UNIQUE,
@@ -22,8 +20,6 @@ CREATE TABLE usuarios (
 );
 
 INSERIR USUÁRIOS PADRÃO
-
-use estoque;
 
 INSERT INTO usuarios (login, senha, tipo) VALUES ("gestor1", "4321", "gestor");
 INSERT INTO usuarios (login, senha, tipo) VALUES ("funcionario1", "4321", "funcionario");
